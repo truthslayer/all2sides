@@ -224,10 +224,15 @@ window.onload=function(){
     function all_false() {
 	cnnl = nytl = foxl = wapol = wsjl = false;
 	canvas1.getContext('2d').clearRect(0, 0, canvas1.width, canvas1.height);
+	canvas1.style.width, canvas1.style.height = "";
 	canvas2.getContext('2d').clearRect(0, 0, canvas2.width, canvas2.height);
+	canvas2.style.width, canvas2.style.height = "";
 	canvas3.getContext('2d').clearRect(0, 0, canvas3.width, canvas3.height);
+	canvas3.style.width, canvas3.style.height = "";
 	canvas4.getContext('2d').clearRect(0, 0, canvas4.width, canvas4.height);
+	canvas4.style.width, canvas4.style.height = "";
 	canvas5.getContext('2d').clearRect(0, 0, canvas5.width, canvas5.height);
+	canvas5.style.width, canvas5.style.height = "";
 	a1.innerHTML = "";
 	a2.innerHTML = "";
 	a3.innerHTML = "";
@@ -271,14 +276,11 @@ window.onload=function(){
 	// Maybe remember the annotations. hmm.
     }
 
-    function write_loading(canv) {
-	var canvas = document.getElementById(canv);
-	var ctx = canvas.getContext("2d");
-	ctx.fillStyle = "#003300";
-	ctx.font = '10px poppins';
-	var textString = "Loading PDF, please wait...",
-	    textWidth = ctx.measureText(textString ).width;
-	ctx.fillText(textString , (canvas.width/4), 100);
+    function write_loading(div) {
+	var d = document.getElementById(div);
+	d.innerHtml = "Loading PDF, please wait...";
+	d.style.fontSize = "15px";
+	d.style.fontFace = "poppins";
     }
     
     function swap_l(name, url, bl, br) {
@@ -296,7 +298,7 @@ window.onload=function(){
 	//	document.getElementById(a1).style.visibility = 'visible';
 	if (!bl && !br) {
 	    console.log('loading left pdf ' + url);
-	    write_loading(can1);
+	    write_loading('loading');
 	    loadPdf(cdate + url, can1, div1, can2, div2, a1, a2);
 	    return true;
 	} else if (br) {
@@ -329,7 +331,7 @@ window.onload=function(){
 //	document.getElementById(a).style.visibility = 'visible';
 	if (!bl && !br) {
 	    console.log('loading right pdf ');
-	    write_loading(can1);
+	    write_loading('loading-right');
 	    loadPdf(cdate + str, can1, div1, can2, div2, a, a2);
 	    return true;
 	} else if (bl) {
