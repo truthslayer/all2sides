@@ -17,7 +17,7 @@ var cnnp = null;
 var foxp = null;
 var wsjp = null;
 var wapop = null;
-var prefix, hprefix = "news-clips/";
+var prefix, hprefix = "/news-clips/";
 var cdate = "";
 
 window.onload=function(){
@@ -276,7 +276,7 @@ window.onload=function(){
 	// Maybe remember the annotations. hmm.
     }
 
-    function write_loading(div) {
+    function write_loading(canv) {
 	var d = document.getElementById(div);
 	d.innerHtml = "Loading PDF, please wait...";
 	d.style.fontSize = "15px";
