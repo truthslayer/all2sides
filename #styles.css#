@@ -155,7 +155,6 @@ body {
     width: 40%;
 }
 
-
 #loading-right {
     position: absolute;
     width: 40%;

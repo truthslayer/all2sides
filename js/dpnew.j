@@ -17,7 +17,7 @@ var cnnp = null;
 var foxp = null;
 var wsjp = null;
 var wapop = null;
-var prefix, hprefix = "news-clips/";
+var prefix, hprefix = "/news-clips/";
 var cdate = "";
 
 window.onload=function(){
@@ -277,12 +277,10 @@ window.onload=function(){
     }
 
     function write_loading(div) {
-	
-	var text = "Loading PDF, please wait...";
-	var dp = document.getElementById(div);
-	dp.style.fontSize = '12px';
-	dp.style.fontFamily = 'Poppins';
-	dp.innerHTML = '<br> ' + text;
+	var d = document.getElementById(div);
+	d.innerHtml = "Loading PDF, please wait...";
+	d.style.fontSize = "15px";
+	d.style.fontFace = "poppins";
     }
     
     function swap_l(name, url, bl, br) {
