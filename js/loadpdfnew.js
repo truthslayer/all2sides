@@ -215,15 +215,17 @@ function loadPdf(url, cvname, dname, cv2, d2, a, a2) {
 	    given_pdf(pdf, 'http://all2sides.com/' + url, cvname, dname, cv2, d2, a, a2);
 	} else {
 	    // Asynchronous download of PDF 
-	    try {
-		PDFJS.getDocument('http://all2sides.com/' + url).then(pdf => {
-		    pdfDocument = pdf;
-		    set_correct_page(url, pdf);
-		    given_pdf(pdf, url, cvname, dname, cv2, d2, a, a2);
-		});
-	    } catch (e) {
+	    window.addEventListener('error', function(e) {
+		console.log(e + ' I caught this!');
+	    }, true);
+	    PDFJS.getDocument('http://all2sides.com/' + url).then(pdf => {
+		pdfDocument = pdf;
+		set_correct_page(url, pdf);
+		given_pdf(pdf, url, cvname, dname, cv2, d2, a, a2);
+	    });
+/* what I'll put in that catch for future*/
 		// Print "whoops no pdf found!" on the canvas.
-		var dput;
+	/*	var dput;
 		if (cvname.match(/(.*)right(.*)/)) {
 		    dput =  'loading-right';
 		} else {
@@ -233,7 +235,10 @@ function loadPdf(url, cvname, dname, cv2, d2, a, a2) {
 		dp.style.fontSize = '12px';
 		dp.style.fontFamily = 'Poppins';
 		dp.innerHTML = "This PDF cannot load. Try another date/site!";
-	    }
+	*/
+	     window.removeEventListener('error', function(e) {
+		console.log(e + ' I caught this!');
+	    }, true);
 	}
     }
 };
