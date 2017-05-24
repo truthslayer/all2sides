@@ -222,7 +222,12 @@ function loadPdf(url, cvname, dname, cv2, d2, a, a2) {
 		pdfDocument = pdf;
 		set_correct_page(url, pdf);
 		given_pdf(pdf, url, cvname, dname, cv2, d2, a, a2);
-	    });
+	    }, function(error){
+		console.log("Error occurred", error);
+	    }).then(null, function(error){
+    console.log("Error occurred", error);
+});
+	 
 /* what I'll put in that catch for future*/
 		// Print "whoops no pdf found!" on the canvas.
 	/*	var dput;

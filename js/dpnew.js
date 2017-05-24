@@ -1,3 +1,6 @@
+window.addEventListener('error', function(e) {
+    console.log(e + 'I found it');
+}, true);
 // "macros"
 var CNN = "cnn";
 var FOX = "fox";
