@@ -222,15 +222,22 @@ function loadPdf(url, cvname, dname, cv2, d2, a, a2) {
 	    }, function(error){
 		console.log('pdf could not be loaded. Writing such.');
 		var dput;
+		var cd;
 		if (cvname.match(/(.*)right(.*)/)) {
 		    dput =  'loading-right';
+		    cd = 'date-space-right';
 		} else {
 		    dput =  'loading';
+		    cd = 'date-space';
 		}
 		var dp = document.getElementById(dput);
 		dp.style.fontSize = '12px';
 		dp.style.fontFamily = 'Poppins';
 		dp.innerHTML = "This PDF cannot load. Try another date/site!";
+		var cp = document.getElementById(cd);
+		cp.style.fontSize = '12px';
+		cp.style.fontFamily = 'Poppins';
+		cp.innerHTML = "";
 	    });
 	 
 /* what I'll put in that catch for future*/
