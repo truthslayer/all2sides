@@ -21,11 +21,7 @@ var wapop = null;
 var prefix, hprefix = "news-clips/";
 var cdate = "";
 
-// get aws set up
-AWS.config.update({
-    accessKeyId: "AKIAJ5QHG7BBXGRUXQZA",
-    secretAccessKey: "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"
-});
+
 var s3 = new AWS.S3();
 
 window.onload=function(){
