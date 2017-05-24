@@ -97,7 +97,7 @@ function cnn_special(url, cvname, dname, cv2, d2, a, a2) {
     s3.headObject(params, function(err, data) {
 	if (err) {
 	    // load the pdf like a normal fucking person
-	    alert('did not find png.');
+//	    alert('did not find png.');
 	    var gpdf = get_pdf(CNN);
 	    if (gpdf != null) {
 		// we already have a pdf
@@ -115,7 +115,7 @@ function cnn_special(url, cvname, dname, cv2, d2, a, a2) {
 	} else {
 	    // if so, load the pdf (to get the annotations) but not render
 	    // it. It should fill the canvas with the compressed png
-	    alert('did find png!');
+	    //	    alert('did find png!');
 	    // Load the pdf, which will load the png in the canvas too, and do annotations
 	    var gpdf = get_pdf(CNN);
 	    if (gpdf != null) {
@@ -215,11 +215,25 @@ function loadPdf(url, cvname, dname, cv2, d2, a, a2) {
 	    given_pdf(pdf, 'http://all2sides.com/' + url, cvname, dname, cv2, d2, a, a2);
 	} else {
 	    // Asynchronous download of PDF 
-	    PDFJS.getDocument('http://all2sides.com/' + url).then(pdf => {
-		pdfDocument = pdf;
-		set_correct_page(url, pdf);
-		given_pdf(pdf, url, cvname, dname, cv2, d2, a, a2);
-	    });
+	    try {
+		PDFJS.getDocument('http://all2sides.com/' + url).then(pdf => {
+		    pdfDocument = pdf;
+		    set_correct_page(url, pdf);
+		    given_pdf(pdf, url, cvname, dname, cv2, d2, a, a2);
+		});
+	    } catch (e) {
+		// Print "whoops no pdf found!" on the canvas.
+		var dput;
+		if (cvname.match(/(.*)right(.*)/)) {
+		    dput =  'loading-right';
+		} else {
+		    dput =  'loading';
+		}
+		var dp = document.getElementById(dput);
+		dp.style.fontSize = '12px';
+		dp.style.fontFamily = 'Poppins';
+		dp.innerHTML = "This PDF cannot load. Try another date/site!";
+	    }
 	}
     }
 };
