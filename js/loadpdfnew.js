@@ -83,21 +83,144 @@ function get_pdf(name) {
 	return null;
     }
 }
+
+
+function cnn_special(url, cvname, dname, cv2, d2, a, a2) {
+    // Check if the png exits.
+    console.log('checking dates for cnn png ' + url);
+    if (get_name(url) != CNN) {
+	alert('only call with cnn!');
+    }
+    var url_new = url.replace(/pdf/i, 'png');
+    console.log("cnn url new " +  url_new);
+    var params = {Bucket: 'all2sides.com', Key: url_new};
+    s3.headObject(params, function(err, data) {
+	if (err) {
+	    // load the pdf like a normal fucking person
+	    alert('did not find png.');
+	    var gpdf = get_pdf(CNN);
+	    if (gpdf != null) {
+		// we already have a pdf
+		given_pdf(pdf, url, cvname,
+			      dname, cv2, d2, a, a2);
+	    } else {
+		// don't yet have a pdf
+		PDFJS.getDocument('http://all2sides.com/' + url).then(pdf => {
+		    pdfDocument = pdf;
+		    set_correct_page(url, pdf);
+		    given_pdf(pdf, url, cvname,
+			      dname, cv2, d2, a, a2);
+		});
+	    }
+	} else {
+	    // if so, load the pdf (to get the annotations) but not render
+	    // it. It should fill the canvas with the compressed png
+	    alert('did find png!');
+	    // Load the pdf, which will load the png in the canvas too, and do annotations
+	    var gpdf = get_pdf(CNN);
+	    if (gpdf != null) {
+		given_pdf_cnn(pdf, url_new, cvname,
+			      dname, cv2, d2, a, a2);
+	    } else {	// Asynchronous download of PDF 
+		PDFJS.getDocument('http://all2sides.com/' + url).then(pdf => {
+		    pdfDocument = pdf;
+		    set_correct_page(url, pdf);
+		    given_pdf_cnn(pdf, url_new, cvname, dname, cv2, d2, a, a2);
+		});
+	    }
+	    return false;
+	}
+    });
+}
+
+// JM todo: make sure that you don't render the pdf, but instead the
+// png at the url Just load the annotations :)
+function given_pdf_cnn(pdf, url, cvname, dname, cv2, d2, a, a2) {
+    pdf.getPage(1).then(function (page) {
+	console.log('here');
+	console.log(pdf + ' ' + url + ' ' + cvname + ' ' + dname + ' ' + cv2 + ' ' + d2 + ' ' + a + ' ' + a2);
+	console.log('Page loaded');
+	var scale = 1;
+	var viewport = page.getViewport(scale);
+	// Prepare canvas using PDF page dimensions.
+	var canvas = document.getElementById(cvname);
+	var context = canvas.getContext('2d');
+	canvas.width = viewport.width;
+	canvas.height = viewport.height;
+	canvas.style.width = "100%";
+	canvas.style.height = "100%";
+	// this was wrapper, but ideally it'll be the div for the resp
+	// canvas. then the reload will just pull the right div up
+	// front and no resizing will be necessary.
+	var pdfContainer = document.getElementById(dname);
+	var ldiv = document.getElementById('div-left');
+	console.log('ldiv ' + ldiv.offsetWidth + 'viewport w' + viewport.width);
+	var sc = ldiv.clientWidth * .8 / viewport.width;
+	console.log('scale ' + sc + ' means width is ' + viewport.width * sc);
+	pdfContainer.style.width = Math.floor(viewport.width * sc) + 'pt';
+	pdfContainer.style.height = Math.floor(viewport.height * sc) + 'pt';
+	var annote = document.getElementById(a);
+	annote.style.width = Math.floor(viewport.width * sc) + 'pt';
+	annote.style.height = Math.floor(viewport.height * sc) + 'pt';
+
+// setting up the other canvas/annotations
+	var canvas2 = document.getElementById(cv2);
+	var context2 = canvas2.getContext('2d');
+	canvas2.width = viewport.width;
+	canvas2.height = viewport.height;
+	canvas2.style.width = "100%";
+	canvas2.style.height = "100%";
+	// this was wrapper, but ideally it'll be the div for the resp canvas. then the reload will just pull the right div up front and no resizing will be necessary. 
+	var wrapper2 = document.getElementById(d2);
+	var ldiv = document.getElementById('div-left');
+	console.log('ldiv ' + ldiv.offsetWidth + 'viewport w' + viewport.width);
+	console.log('scale ' + sc + ' means width is ' + viewport.width * sc);
+	wrapper2.style.width = Math.floor(viewport.width * sc) + 'pt';
+	wrapper2.style.height = Math.floor(viewport.height * sc) + 'pt';
+	var annote2 = document.getElementById(a2);
+	annote2.style.width = Math.floor(viewport.width * sc) + 'pt';
+	annote2.style.height = Math.floor(viewport.height * sc) + 'pt';
+
+	setupAnnotations(page, viewport, cvname, annote,   1.33  * sc);
+	setupAnnotations(page, viewport, cv2, annote2, 1.33 *  sc);
+	var renderContext = {
+	    canvasContext: context,
+	    viewport: viewport,
+	};
+	//JM: render the png here!
+//	page.render(renderContext);
+	var img = new Image();
+	var can = document.getElementById(cvname);
+	var ctx = can.getContext('2d');
+	img.src =  'http://all2sides.com/' + url;
+	alert( 'http://all2sides.com/' + url);
+	img.onload = function () {
+	    ctx.drawImage(img, 0, 0);
+	    remove_loading(cvname);
+	}
+    });
     
+}
+
 function loadPdf(url, cvname, dname, cv2, d2, a, a2) {
     set_date_space(dname, url);    
     console.log('load pdf ' + url + ' ' + cvname + ' ' + dname + ' ' + d2 + ' ' + a + ' ' + a2);
     var name = get_name(url);
-    var gpdf = get_pdf(name);
-    if (gpdf != null) {
-	given_pdf(pdf, 'http://all2sides.com/' + url, cvname, dname, cv2, d2, a, a2);
+    if (name == CNN) {
+	cnn_special(url, cvname, dname, cv2, d2, a, a2);
+	return;
     } else {
-	// Asynchronous download of PDF 
-	PDFJS.getDocument('http://all2sides.com/' + url).then(pdf => {
-	    pdfDocument = pdf;
-	    set_correct_page(url, pdf);
-	    given_pdf(pdf, url, cvname, dname, cv2, d2, a, a2);
-	});
+	var gpdf = get_pdf(name);
+	if (gpdf != null) {
+	    given_pdf(pdf, 'http://all2sides.com/' + url, cvname, dname, cv2, d2, a, a2);
+	} else {
+	    // Asynchronous download of PDF 
+	    PDFJS.getDocument('http://all2sides.com/' + url).then(pdf => {
+		pdfDocument = pdf;
+		set_correct_page(url, pdf);
+		given_pdf(pdf, url, cvname, dname, cv2, d2, a, a2);
+	    });
+	}
     }
 };
 

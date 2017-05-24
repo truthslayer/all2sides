@@ -7,6 +7,7 @@ var NYT = "nytimes";
 // URLs
 var nyt = 'www.nytimes.com-wkh.compressed.pdf';
 var cnn = 'www.cnn.com-phantomjs.compressed.pdf';
+var cnn_png = 'www.cnn.com-phantomjs.compressed.png';
 var fox = 'www.foxnews.com-wkh.compressed.pdf';
 var wsj = 'www.wsj.com-wkh.compressed.pdf';
 var wapo = 'www.washingtonpost.com-wkh.compressed.pdf';
@@ -19,6 +20,13 @@ var wsjp = null;
 var wapop = null;
 var prefix, hprefix = "news-clips/";
 var cdate = "";
+
+// get aws set up
+AWS.config.update({
+    accessKeyId: "AKIAJ5QHG7BBXGRUXQZA",
+    secretAccessKey: "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"
+});
+var s3 = new AWS.S3();
 
 window.onload=function(){
     // to fix the sizing.
@@ -276,8 +284,7 @@ window.onload=function(){
 	// Maybe remember the annotations. hmm.
     }
 
-    function write_loading(div) {
-	
+    function write_loading(div) {	
 	var text = "Loading PDF, please wait...";
 	var dp = document.getElementById(div);
 	dp.style.fontSize = '12px';
@@ -345,14 +352,7 @@ window.onload=function(){
 	}
     }
 
-
-// get aws set up
-AWS.config.update({
-    accessKeyId: "AKIAJ5QHG7BBXGRUXQZA",
-    secretAccessKey: "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"
-});
-var s3 = new AWS.S3();
-
+ 
 
 function date_obj_now() {
     return moment().tz('America/New_York');
@@ -473,14 +473,15 @@ function dt_now() {
     render_right();     
     }); */
     // datepicker
-	var checkin = $('.dpd1').datepicker()
-.on('click', function (ev) {
-        $('.datepicker').css("z-index", "999999999");
-}).data('datepicker');
-	
+    var checkin = $('.dpd1').datepicker()
+	.on('click', function (ev) {
+            $('.datepicker').css("z-index", "999999999");
+	}).data('datepicker');
+    var startDate = new Date('02/13/2017');
     jQuery(function($) {
-    $(".date").datepicker({
-        maxDate : 0,
+	$(".date").datepicker({
+	    minDate: startDate,
+            maxDate : 0,
 	dateFormat: "yy-mm-dd",
 	onSelect: function(dateText) {
 	    var attempt = $(this).datepicker('getDate');
