@@ -87,12 +87,12 @@ function get_pdf(name) {
 
 function cnn_special(url, cvname, dname, cv2, d2, a, a2) {
     // Check if the png exits.
-    console.log('checking dates for cnn png ' + url);
+   console.log('checking dates for cnn png ' + url);
     if (get_name(url) != CNN) {
 	alert('only call with cnn!');
     }
     var url_new = url.replace(/pdf/i, 'png');
-    console.log("cnn url new " +  url_new);
+  //  console.log("cnn url new " +  url_new);
     var params = {Bucket: 'all2sides.com', Key: url_new};
     s3.headObject(params, function(err, data) {
 	if (err) {
@@ -154,9 +154,9 @@ function given_pdf_cnn(pdf, url, cvname, dname, cv2, d2, a, a2) {
 	// front and no resizing will be necessary.
 	var pdfContainer = document.getElementById(dname);
 	var ldiv = document.getElementById('div-left');
-	console.log('ldiv ' + ldiv.offsetWidth + 'viewport w' + viewport.width);
+//	console.log('ldiv ' + ldiv.offsetWidth + 'viewport w' + viewport.width);
 	var sc = ldiv.clientWidth * .8 / viewport.width;
-	console.log('scale ' + sc + ' means width is ' + viewport.width * sc);
+//	console.log('scale ' + sc + ' means width is ' + viewport.width * sc);
 	pdfContainer.style.width = Math.floor(viewport.width * sc) + 'pt';
 	pdfContainer.style.height = Math.floor(viewport.height * sc) + 'pt';
 	var annote = document.getElementById(a);
@@ -173,8 +173,8 @@ function given_pdf_cnn(pdf, url, cvname, dname, cv2, d2, a, a2) {
 	// this was wrapper, but ideally it'll be the div for the resp canvas. then the reload will just pull the right div up front and no resizing will be necessary. 
 	var wrapper2 = document.getElementById(d2);
 	var ldiv = document.getElementById('div-left');
-	console.log('ldiv ' + ldiv.offsetWidth + 'viewport w' + viewport.width);
-	console.log('scale ' + sc + ' means width is ' + viewport.width * sc);
+//	console.log('ldiv ' + ldiv.offsetWidth + 'viewport w' + viewport.width);
+//	console.log('scale ' + sc + ' means width is ' + viewport.width * sc);
 	wrapper2.style.width = Math.floor(viewport.width * sc) + 'pt';
 	wrapper2.style.height = Math.floor(viewport.height * sc) + 'pt';
 	var annote2 = document.getElementById(a2);
@@ -193,7 +193,7 @@ function given_pdf_cnn(pdf, url, cvname, dname, cv2, d2, a, a2) {
 	var can = document.getElementById(cvname);
 	var ctx = can.getContext('2d');
 	img.src =  'http://all2sides.com/' + url;
-	alert( 'http://all2sides.com/' + url);
+//	alert( 'http://all2sides.com/' + url);
 	img.onload = function () {
 	    ctx.drawImage(img, 0, 0);
 	    remove_loading(cvname);
@@ -204,7 +204,7 @@ function given_pdf_cnn(pdf, url, cvname, dname, cv2, d2, a, a2) {
 
 function loadPdf(url, cvname, dname, cv2, d2, a, a2) {
     set_date_space(dname, url);    
-    console.log('load pdf ' + url + ' ' + cvname + ' ' + dname + ' ' + d2 + ' ' + a + ' ' + a2);
+//    console.log('load pdf ' + url + ' ' + cvname + ' ' + dname + ' ' + d2 + ' ' + a + ' ' + a2);
     var name = get_name(url);
     if (name == CNN) {
 	cnn_special(url, cvname, dname, cv2, d2, a, a2);
@@ -215,18 +215,23 @@ function loadPdf(url, cvname, dname, cv2, d2, a, a2) {
 	    given_pdf(pdf, 'http://all2sides.com/' + url, cvname, dname, cv2, d2, a, a2);
 	} else {
 	    // Asynchronous download of PDF 
-	    window.addEventListener('error', function(e) {
-		console.log(e + ' I caught this!');
-	    }, true);
-	    PDFJS.getDocument('http://all2sides.com/' + url).then(pdf => {
+	    PDFJS.getDocument('http://all2sides.com/' + url).then(function(pdf) {
 		pdfDocument = pdf;
 		set_correct_page(url, pdf);
 		given_pdf(pdf, url, cvname, dname, cv2, d2, a, a2);
 	    }, function(error){
-		console.log("Error occurred", error);
-	    }).then(null, function(error){
-    console.log("Error occurred", error);
-});
+		console.log('pdf could not be loaded. Writing such.');
+		var dput;
+		if (cvname.match(/(.*)right(.*)/)) {
+		    dput =  'loading-right';
+		} else {
+		    dput =  'loading';
+		}
+		var dp = document.getElementById(dput);
+		dp.style.fontSize = '12px';
+		dp.style.fontFamily = 'Poppins';
+		dp.innerHTML = "This PDF cannot load. Try another date/site!";
+	    });
 	 
 /* what I'll put in that catch for future*/
 		// Print "whoops no pdf found!" on the canvas.
@@ -241,18 +246,15 @@ function loadPdf(url, cvname, dname, cv2, d2, a, a2) {
 		dp.style.fontFamily = 'Poppins';
 		dp.innerHTML = "This PDF cannot load. Try another date/site!";
 	*/
-	     window.removeEventListener('error', function(e) {
-		console.log(e + ' I caught this!');
-	    }, true);
 	}
     }
 };
 
 function given_pdf(pdf, url, cvname, dname, cv2, d2, a, a2) {
     pdf.getPage(1).then(function (page) {
-	console.log('here');
+//	console.log('here');
 	console.log(pdf + ' ' + url + ' ' + cvname + ' ' + dname + ' ' + cv2 + ' ' + d2 + ' ' + a + ' ' + a2);
-	console.log('Page loaded');
+//	console.log('Page loaded');
 	var scale = 1;
 	var viewport = page.getViewport(scale);
 	// Prepare canvas using PDF page dimensions.
@@ -267,9 +269,9 @@ function given_pdf(pdf, url, cvname, dname, cv2, d2, a, a2) {
 	// front and no resizing will be necessary.
 	var pdfContainer = document.getElementById(dname);
 	var ldiv = document.getElementById('div-left');
-	console.log('ldiv ' + ldiv.offsetWidth + 'viewport w' + viewport.width);
+//	console.log('ldiv ' + ldiv.offsetWidth + 'viewport w' + viewport.width);
 	var sc = ldiv.clientWidth * .8 / viewport.width;
-	console.log('scale ' + sc + ' means width is ' + viewport.width * sc);
+//	console.log('scale ' + sc + ' means width is ' + viewport.width * sc);
 	pdfContainer.style.width = Math.floor(viewport.width * sc) + 'pt';
 	pdfContainer.style.height = Math.floor(viewport.height * sc) + 'pt';
 	var annote = document.getElementById(a);
@@ -286,8 +288,8 @@ function given_pdf(pdf, url, cvname, dname, cv2, d2, a, a2) {
 	// this was wrapper, but ideally it'll be the div for the resp canvas. then the reload will just pull the right div up front and no resizing will be necessary. 
 	var wrapper2 = document.getElementById(d2);
 	var ldiv = document.getElementById('div-left');
-	console.log('ldiv ' + ldiv.offsetWidth + 'viewport w' + viewport.width);
-	console.log('scale ' + sc + ' means width is ' + viewport.width * sc);
+//	console.log('ldiv ' + ldiv.offsetWidth + 'viewport w' + viewport.width);
+//	console.log('scale ' + sc + ' means width is ' + viewport.width * sc);
 	wrapper2.style.width = Math.floor(viewport.width * sc) + 'pt';
 	wrapper2.style.height = Math.floor(viewport.height * sc) + 'pt';
 	var annote2 = document.getElementById(a2);
