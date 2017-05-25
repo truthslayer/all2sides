@@ -303,8 +303,8 @@ function given_pdf(pdf, url, cvname, dname, cv2, d2, a, a2) {
 	annote2.style.width = Math.floor(viewport.width * sc) + 'pt';
 	annote2.style.height = Math.floor(viewport.height * sc) + 'pt';
 
-	setupAnnotations(page, viewport, cvname, annote,   1.33  * sc / 2.0);
-	setupAnnotations(page, viewport, cv2, annote2, 1.33 *  sc / 2.0);
+	setupAnnotations(page, viewport, cvname, annote,      sc / 2.0);
+	setupAnnotations(page, viewport, cv2, annote2,  sc / 2.0);
 	var renderContext = {
 	    canvasContext: context,
 	    viewport: viewport,
