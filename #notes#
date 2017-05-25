@@ -1,0 +1,24 @@
+Proper, without more scaling
+
+<a href="http://www.foxnews.com/politics/2017/05/25/greg-gianforte-montana-house-gop-candidate-cited-for-misdemeanor-assault-after-incident.html" style="border-width: 0px; border-color: rgb(0, 0, 0); border-style: solid; width: 230px; height: 53px; left: 615.674px; top: 370.128px; position: absolute; transform: matrix(1, 0, 0, 1, 0, 0); transform-origin: -32.4px -150.72px 0px;"></a>
+
+
+
+with (2, 1.33)
+
+<a href="http://www.foxnews.com/politics/2017/05/25/greg-gianforte-montana-house-gop-candidate-cited-for-misdemeanor-assault-after-incident.html" style="border-width: 0px; border-color: rgb(0, 0, 0); border-style: solid; width: 115px; height: 27px; left: 603.837px; top: 315.064px; position: absolute; transform: matrix(2, 0, 0, 2, 0, 0); transform-origin: -32.4px -150.72px 0px;"></a>
+
+width and height are off by a factor of 2, left and top off by a small amount (615.674/603.837= 1.0196 and 370.128/315.064 = 1.17), transform matrix off by a factor of 2.
+
+------
+
+<a href="http://www.foxnews.com/world/2017/05/25/manchester-bombing-theresa-may-to-confront-trump-on-investigation-leaks.html" style="border-width: 0px; border-color: rgb(0, 0, 0); border-style: solid; width: 276px; height: 53px; left: 615.674px; top: 370.128px; position: absolute; transform: matrix(1, 0, 0, 1, 0, 0); transform-origin: -32.4px -150.72px 0px;"></a>
+
+with (2, 1.33/ 2)
+
+<a href="http://www.foxnews.com/world/2017/05/25/manchester-bombing-theresa-may-to-confront-trump-on-investigation-leaks.html" style="border-width: 0px; border-color: rgb(0, 0, 0); border-style: solid; width: 69px; height: 14px; left: 597.918px; top: 287.532px; position: absolute; transform: matrix(2, 0, 0, 2, 0, 0); transform-origin: -32.4px -150.72px 0px;"></a>
+
+with (2, 1.33/ 2) and (1,
+
+
+<a href="http://www.foxnews.com/world/2017/05/25/manchester-bombing-theresa-may-to-confront-trump-on-investigation-leaks.html" style="border-width: 0px; border-color: rgb(0, 0, 0); border-style: solid; width: 69px; height: 14px; left: 597.918px; top: 287.532px; position: absolute; transform: matrix(2, 0, 0, 2, 0, 0); transform-origin: -32.4px -150.72px 0px;"></a>

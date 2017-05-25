@@ -366,7 +366,7 @@ function setupAnnotations(page, viewport, canvas, $annotationLayerDiv, scale) {
 	    element.style.position = 'absolute';
 
 	    var transform = viewport.transform;
-	    var transformStr = 'matrix(1,0,0,1,0,0,)'; // + transform.join(',') + ')';
+	    var transformStr = 'matrix(1,0,0,1,0,0)'; // + transform.join(',') + ')';
 	    CustomStyle.setProp('transform', element, transformStr);
 	    var transformOriginStr = -rect[0] + 'px ' + -rect[1] + 'px';
 	    CustomStyle.setProp('transformOrigin', element, transformOriginStr);
