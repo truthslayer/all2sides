@@ -303,7 +303,7 @@ function given_pdf(pdf, url, cvname, dname, cv2, d2, a, a2) {
 	annote2.style.width = Math.floor(viewport.width * sc) + 'pt';
 	annote2.style.height = Math.floor(viewport.height * sc) + 'pt';
 
-	setupAnnotations(page, viewport, cvname, annote,      sc / 2.0);
+	setupAnnotations(page, viewport, cvname, annote,  sc / 2.0);
 	setupAnnotations(page, viewport, cv2, annote2,  sc / 2.0);
 	var renderContext = {
 	    canvasContext: context,
@@ -365,12 +365,12 @@ function setupAnnotations(page, viewport, canvas, $annotationLayerDiv, scale) {
 	    element.style.height = Math.ceil(scale * (rect[3] - rect[1])) + 'px'
 	    element.style.position = 'absolute';
 
-/*	    var transform = viewport.transform;
+	    var transform = viewport.transform;
 	    var transformStr = 'matrix(' + transform.join(',') + ')';
 	    CustomStyle.setProp('transform', element, transformStr);
 	    var transformOriginStr = -rect[0] + 'px ' + -rect[1] + 'px';
 	    CustomStyle.setProp('transformOrigin', element, transformOriginStr);
-*/
+
 	    if (data.subtype === 'Link' && !data.url) {
 		// In this example,  we do not handle the `Link` annotation without url.
 		// If you want to handle these links, see `web/page_view.js`.
