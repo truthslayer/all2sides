@@ -303,8 +303,8 @@ function given_pdf(pdf, url, cvname, dname, cv2, d2, a, a2) {
 	annote2.style.width = Math.floor(viewport.width * sc) + 'pt';
 	annote2.style.height = Math.floor(viewport.height * sc) + 'pt';
 
-	setupAnnotations(page, viewport, cvname, annote,  sc / 2.0);
-	setupAnnotations(page, viewport, cv2, annote2,  sc / 2.0);
+	setupAnnotations(page, viewport, cvname, annote,  sc * 1.33);
+	setupAnnotations(page, viewport, cv2, annote2,  sc * 1.33);
 	var renderContext = {
 	    canvasContext: context,
 	    viewport: viewport,
@@ -366,7 +366,7 @@ function setupAnnotations(page, viewport, canvas, $annotationLayerDiv, scale) {
 	    element.style.position = 'absolute';
 
 	    var transform = viewport.transform;
-	    var transformStr = 'matrix(1, 0, 0, 1, 0, 0)';// + transform.join(',') + ')';
+	    var transformStr = 'matrix(' + transform.join(',') + ')';
 	    CustomStyle.setProp('transform', element, transformStr);
 	    var transformOriginStr = -rect[0] + 'px ' + -rect[1] + 'px';
 	    CustomStyle.setProp('transformOrigin', element, transformOriginStr);
