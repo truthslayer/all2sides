@@ -67,6 +67,23 @@ function remove_loading(cname) {
     dp.innerHTML = "";
 }
 
+function get_scale(name) {
+     if (name == CNN) {
+	return 1.0;
+    } else if (name == FOX) {
+	return 2.0;
+    } else if (name == NYT) {
+	return .5;
+    } else if (name == WSJ) {
+	return 1.0;
+    } else if (name == WAPO) {
+	return 1.5;
+    } else {
+	alert('wtf');
+	return 1.0;
+    }
+}
+    
 function get_pdf(name) {
     if (name == CNN) {
 	return cnnp;
@@ -261,8 +278,8 @@ function given_pdf(pdf, url, cvname, dname, cv2, d2, a, a2) {
     pdf.getPage(1).then(function (page) {
 //	console.log('here');
 	console.log(pdf + ' ' + url + ' ' + cvname + ' ' + dname + ' ' + cv2 + ' ' + d2 + ' ' + a + ' ' + a2);
-//	console.log('Page loaded');
-	var scale = 2;
+	//	console.log('Page loaded');	
+	var scale = get_scale(get_name(url));
 	var viewport = page.getViewport(scale);
 	// Prepare canvas using PDF page dimensions.
 	var canvas = document.getElementById(cvname);
@@ -303,8 +320,8 @@ function given_pdf(pdf, url, cvname, dname, cv2, d2, a, a2) {
 	annote2.style.width = Math.floor(viewport.width * sc) + 'pt';
 	annote2.style.height = Math.floor(viewport.height * sc) + 'pt';
 
-	setupAnnotations(page, viewport, cvname, annote,  sc * 1.33 * 2);
-	setupAnnotations(page, viewport, cv2, annote2,  sc * 1.33 * 2);
+	setupAnnotations(page, viewport, cvname, annote,  sc * 1.33 * scale);
+	setupAnnotations(page, viewport, cv2, annote2,  sc * 1.33 * scale);
 	var renderContext = {
 	    canvasContext: context,
 	    viewport: viewport,

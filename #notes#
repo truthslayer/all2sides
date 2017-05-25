@@ -18,7 +18,14 @@ with (2, 1.33/ 2)
 
 <a href="http://www.foxnews.com/world/2017/05/25/manchester-bombing-theresa-may-to-confront-trump-on-investigation-leaks.html" style="border-width: 0px; border-color: rgb(0, 0, 0); border-style: solid; width: 69px; height: 14px; left: 597.918px; top: 287.532px; position: absolute; transform: matrix(2, 0, 0, 2, 0, 0); transform-origin: -32.4px -150.72px 0px;"></a>
 
-with (2, 1.33/ 2) and (1,
+with (2, 1.33/ 2) and (1,0,0,1,0,0) hardcoded
+
+<a href="http://www.foxnews.com/world/2017/05/25/manchester-bombing-theresa-may-to-confront-trump-on-investigation-leaks.html" style="border-width: 0px; border-color: rgb(0, 0, 0); border-style: solid; width: 69px; height: 14px; left: 597.918px; top: 287.532px; position: absolute; transform: matrix(1, 0, 0, 1, 0, 0); transform-origin: -32.4px -150.72px 0px;"></a>
+
+the width is off by a factor of 4, the height by a factor of 3.78, might be a rounding issue that it's not exactly the same. left and top off by a lot less
 
 
-<a href="http://www.foxnews.com/world/2017/05/25/manchester-bombing-theresa-may-to-confront-trump-on-investigation-leaks.html" style="border-width: 0px; border-color: rgb(0, 0, 0); border-style: solid; width: 69px; height: 14px; left: 597.918px; top: 287.532px; position: absolute; transform: matrix(2, 0, 0, 2, 0, 0); transform-origin: -32.4px -150.72px 0px;"></a>
+
+with (2, 1.33) and (1,0,0,1,0,0) hardcoded
+
+<a href="http://www.foxnews.com/world/2017/05/25/manchester-bombing-theresa-may-to-confront-trump-on-investigation-leaks.html" style="border-width: 0px; border-color: rgb(0, 0, 0); border-style: solid; width: 116px; height: 27px; left: 603.837px; top: 315.064px; position: absolute; transform: matrix(1, 0, 0, 1, 0, 0); transform-origin: -32.4px -150.72px 0px;"></a>
