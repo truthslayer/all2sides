@@ -262,7 +262,7 @@ function given_pdf(pdf, url, cvname, dname, cv2, d2, a, a2) {
 //	console.log('here');
 	console.log(pdf + ' ' + url + ' ' + cvname + ' ' + dname + ' ' + cv2 + ' ' + d2 + ' ' + a + ' ' + a2);
 //	console.log('Page loaded');
-	var scale = 1;
+	var scale = 2;
 	var viewport = page.getViewport(scale);
 	// Prepare canvas using PDF page dimensions.
 	var canvas = document.getElementById(cvname);
