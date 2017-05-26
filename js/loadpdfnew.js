@@ -15,6 +15,42 @@ function get_name(url) {
     }
 }
 
+
+function get_scale(name) {
+     if (name == CNN) {
+	return 1.0;
+    } else if (name == FOX) {
+	return 2.0;
+    } else if (name == NYT) {
+	return 1.2;
+    } else if (name == WSJ) {
+	return 1.0;
+    } else if (name == WAPO) {
+	return 1.5;
+    } else {
+	alert('wtf');
+	return 1.0;
+    }
+}
+    
+function get_pdf(name) {
+    if (name == CNN) {
+	return cnnp;
+    } else if (name == FOX) {
+	return foxp;
+    } else if (name == NYT) {
+	return nytp;
+    } else if (name == WSJ) {
+	return wsjp;
+    } else if (name == WAPO) {
+	return wapop;
+    } else {
+	alert('wtf');
+	return null;
+    }
+}
+
+
 function get_date(url) {
     var m =    url.match(/(.*)\/(.*)\/(.*)/);
     var d =  m[2];
@@ -65,40 +101,6 @@ function remove_loading(cname) {
     dp.style.fontSize = '12px';
     dp.style.fontFamily = 'Poppins';
     dp.innerHTML = "";
-}
-
-function get_scale(name) {
-     if (name == CNN) {
-	return 1.0;
-    } else if (name == FOX) {
-	return 2.0;
-    } else if (name == NYT) {
-	return .5;
-    } else if (name == WSJ) {
-	return 1.0;
-    } else if (name == WAPO) {
-	return 1.5;
-    } else {
-	alert('wtf');
-	return 1.0;
-    }
-}
-    
-function get_pdf(name) {
-    if (name == CNN) {
-	return cnnp;
-    } else if (name == FOX) {
-	return foxp;
-    } else if (name == NYT) {
-	return nytp;
-    } else if (name == WSJ) {
-	return wsjp;
-    } else if (name == WAPO) {
-	return wapop;
-    } else {
-	alert('wtf');
-	return null;
-    }
 }
 
 

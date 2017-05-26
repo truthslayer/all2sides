@@ -7,10 +7,10 @@
   <meta name="robots" content="noindex, nofollow">
   <meta name="googlebot" content="noindex, nofollow">
   <link rel="stylesheet" href="annotations.css">
-  <link href="styles.css" rel="stylesheet" type="text/css">
-  <script src="js/aws-sdk-2.7.18.min.js"></script>
+  <link href="styles.css" rel="stylesheet" type="text/css">  
+<script src="js/aws-sdk-2.7.18.min.js"></script>
   <script type="text/javascript" src="js/justcred.js"></script>
-  <script type="text/javascript" src="js/loadpdfnew.js"></script>
+      <script type="text/javascript" src="js/loadpdfnew.js"></script>
 <script type="text/javascript" src="js/moment.js"></script>    
 <script type="text/javascript" src="js/moment-timezone.js"></script>
 <script type="text/javascript" src="js/dpnew.js"> </script>
@@ -22,7 +22,6 @@
   <script type="text/javascript" src="js-ann/text_layer_builder.min.js"></script>
   <script src="js-ann/old-pdf.min.worker.js"></script>
 <meta name=”viewport” content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-  <link href="css/elements.css" rel="stylesheet">
   
 </head>
 
@@ -44,8 +43,8 @@
 <div id="bottom-border"></div>
 <div id="top-border"></div>
 
-<div id="div-left">
-    <div id="buttons" class="cc-selector">
+<div id=buttons-both>
+ <div id="buttons" class="cc-selector">
       <input id="cnn" value="cnn" type="radio" name="group1" checked="checked"/>
        <label class="drinkcard-cc cnn" for="cnn"></label>
        <input id="nytimes" value="nytimes" type="radio" name="group1"/>
@@ -56,9 +55,26 @@
 	 <label class="drinkcard-cc wsj" for="wsj"></label>
 	 <input id="wapo" value="wapo" type="radio" name="group1"/>
 	 <label class="drinkcard-cc wapo" for="wapo"></label>
-      <div id="date-space"></div>
+    
+	</div>
+	
+	    <div id="buttons-right" class="cc-selector-2">
+      <input id="cnn-right" value="cnn" type="radio" name="group1right"/>
+       <label class="drinkcard-cc cnn" for="cnn-right"></label>
+       <input id="nytimes-right" value="nytimes" type="radio" name="group1right"/>
+       <label class="drinkcard-cc nytimes" for="nytimes-right"></label>
+       <input id="fox-right" value="fox" type="radio" name="group1right"  checked="checked"/>
+       <label class="drinkcard-cc fox" for="fox-right"></label>
+       <input id="wsj-right"  value="wsj" type="radio" name="group1right"/>
+       <label class="drinkcard-cc wsj" for="wsj-right"></label>
+       <input id="wapo-right" value="wapo" type="radio" name="group1right"/>
+       <label class="drinkcard-cc wapo" for="wapo-right"></label>
     </div>
-
+	</div>
+	
+	
+<div id="div-left">
+     <div id="date-space"></div>
     <div id="wrapper">
       <div id="loading"></div>
       <div id="div-cnn" class="pdf-content">
@@ -106,20 +122,7 @@
 
 
   <div id="div-right">
-    <div id="buttons-right" class="cc-selector-2">
-      <input id="cnn-right" value="cnn" type="radio" name="group1right"/>
-       <label class="drinkcard-cc cnn" for="cnn-right"></label>
-       <input id="nytimes-right" value="nytimes" type="radio" name="group1right"/>
-       <label class="drinkcard-cc nytimes" for="nytimes-right"></label>
-       <input id="fox-right" value="fox" type="radio" name="group1right"  checked="checked"/>
-       <label class="drinkcard-cc fox" for="fox-right"></label>
-       <input id="wsj-right"  value="wsj" type="radio" name="group1right"/>
-       <label class="drinkcard-cc wsj" for="wsj-right"></label>
-       <input id="wapo-right" value="wapo" type="radio" name="group1right"/>
-       <label class="drinkcard-cc wapo" for="wapo-right"></label>
-      <div id="date-space-right"></div>
-    </div>
-
+ <div id="date-space-right"></div>
     <div id="wrapper-right">
       <div id="loading-right"></div>
       <div id="div-cnn-right" class="pdf-content">

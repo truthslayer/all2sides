@@ -191,6 +191,23 @@ h1 {
 	width: 45%;
 }   
 
+#buttons-both {
+    width:90%;
+    margin-left: 40px;
+    margin-right: 400px;	
+}
+#buttons {
+	display: inline-block;
+	float: left;
+	width: 45%;  
+}
+
+#buttons-right {
+	display: inline-block;
+   	float: right;
+	width: 40%;
+}   
+
 #left-border {
     left: 0;
 }
