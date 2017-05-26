@@ -192,14 +192,14 @@ h1 {
 }   
 
 #buttons-both {
-    width:90%;
-    margin-left: 40px;
-    margin-right: 400px;	
+    width:100%;
+    margin-left: 0px;
+    margin-right: 0px;	
 }
 #buttons {
 	display: inline-block;
 	float: left;
-	width: 45%;  
+	width: 40%;  
 }
 
 #buttons-right {
