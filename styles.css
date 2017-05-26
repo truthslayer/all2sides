@@ -223,8 +223,8 @@ h1 {
     background:#494479 ;
 }
 
-#top-border, #bottom-border, #left-border, #right-border> #div-left;
-#top-border, #bottom-border, #left-border, #right-border>  #div-right;
+#top-border, #bottom-border, #left-border, #right-border> #div_1;
+#top-border, #bottom-border, #left-border, #right-border>  #div_2;
 #left-border { left: 0; }
 #right-border { right: 0; }
 				
@@ -248,10 +248,10 @@ and (orientation : landscape)
 {
     #top-border, #bottom-border, #left-border, #right-border { display: none; }
 
-    #div-left {
+    #div_1 {
 	margin-left: 0px;
     }
-     #div-right {
+     #div_2 {
 	margin-right: 0px;
     }
  #rest {
@@ -260,7 +260,7 @@ and (orientation : landscape)
      margin-left:10px;
     }
     
-#div-left, #div-right {
+#div_1, #div_2 {
 	width: 45%;  
 }
 
@@ -304,12 +304,12 @@ and (orientation : landscape)
 	margin-right: 0px;
     }
     
-#div-left {
+#div_1 {
     margin-left: 5px;
     width: 45%;  
 }
 
- #div-right {
+ #div_2 {
      width: 45%;
      margin-right: 5px;
  }
