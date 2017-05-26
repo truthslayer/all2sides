@@ -172,7 +172,7 @@ function given_pdf_cnn(pdf, url, cvname, dname, cv2, d2, a, a2) {
 	// canvas. then the reload will just pull the right div up
 	// front and no resizing will be necessary.
 	var pdfContainer = document.getElementById(dname);
-	var ldiv = document.getElementById('div-left');
+	var ldiv = document.getElementById('div_1');
 //	console.log('ldiv ' + ldiv.offsetWidth + 'viewport w' + viewport.width);
 	var sc = ldiv.clientWidth * .8 / viewport.width;
 //	console.log('scale ' + sc + ' means width is ' + viewport.width * sc);
@@ -191,7 +191,7 @@ function given_pdf_cnn(pdf, url, cvname, dname, cv2, d2, a, a2) {
 	canvas2.style.height = "100%";
 	// this was wrapper, but ideally it'll be the div for the resp canvas. then the reload will just pull the right div up front and no resizing will be necessary. 
 	var wrapper2 = document.getElementById(d2);
-	var ldiv = document.getElementById('div-left');
+	var ldiv = document.getElementById('div_1');
 //	console.log('ldiv ' + ldiv.offsetWidth + 'viewport w' + viewport.width);
 //	console.log('scale ' + sc + ' means width is ' + viewport.width * sc);
 	wrapper2.style.width = Math.floor(viewport.width * sc) + 'pt';
@@ -294,7 +294,7 @@ function given_pdf(pdf, url, cvname, dname, cv2, d2, a, a2) {
 	// canvas. then the reload will just pull the right div up
 	// front and no resizing will be necessary.
 	var pdfContainer = document.getElementById(dname);
-	var ldiv = document.getElementById('div-left');
+	var ldiv = document.getElementById('div_1');
 //	console.log('ldiv ' + ldiv.offsetWidth + 'viewport w' + viewport.width);
 	var sc = ldiv.clientWidth * .8 / viewport.width;
 //	console.log('scale ' + sc + ' means width is ' + viewport.width * sc);
@@ -313,7 +313,7 @@ function given_pdf(pdf, url, cvname, dname, cv2, d2, a, a2) {
 	canvas2.style.height = "100%";
 	// this was wrapper, but ideally it'll be the div for the resp canvas. then the reload will just pull the right div up front and no resizing will be necessary. 
 	var wrapper2 = document.getElementById(d2);
-	var ldiv = document.getElementById('div-left');
+	var ldiv = document.getElementById('div_1');
 //	console.log('ldiv ' + ldiv.offsetWidth + 'viewport w' + viewport.width);
 //	console.log('scale ' + sc + ' means width is ' + viewport.width * sc);
 	wrapper2.style.width = Math.floor(viewport.width * sc) + 'pt';

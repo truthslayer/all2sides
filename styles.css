@@ -179,13 +179,13 @@ h1 {
 	background-color: #49447A;
 }
 
-#div-left {
+#div_1 {
 	display: inline-block;
 	float: left;
 	width: 45%;  
 }
 
-#div-right {
+#div_2 {
 	display: inline-block;
    	float: right;
 	width: 45%;
