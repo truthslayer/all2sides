@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+
+  
+  
+
+  
+  
+  
+
+  
+
+  <script type="text/javascript" src="//code.jquery.com/jquery-1.6.2.js"></script>
+
+  
+
+  
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+  
+
+  
+
+  
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+  
+
+  
+    
+      <script type="text/javascript" src="http://code.jquery.com/mobile/1.0b2/jquery.mobile-1.0b2.min.js"></script>
+    
+  
+    
+      <link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.0b2/jquery.mobile-1.0b2.min.css">
+    
+  
+
+  <style type="text/css">
+    
+  </style>
+
+  <title></title>
+
+  
+    
+
+
+
+
+<script type='text/javascript'>//<![CDATA[
+$(function(){
+shctrl = $('div.slidehelp');                          //cache selector for speed
+
+try {                                                 //At beginning, try to...
+    document.createEvent("TouchEvent");               //...create a "TouchEvent"
+    $('p.keyinst').css('display','none');             //If successful, remove key instructions
+    $('p.touchinst').css('display','block');          //and display touch instructions
+}
+catch (e) {
+    $('p.keyinst').css('display','block');            //Error? Display key instructions
+    $('p.touchinst').css('display','none');           //and hide touch instructions
+};
+
+$(document).keydown(function(e){                      //Catch keydown anywhere in document
+    arw = e.which;                                    //Get key that was clicked
+    getcl = $('.ui-page-active').attr('class');       //Get the class of the active page
+    slidetst = getcl.match(/slidehelp/g);             //Is 'slidehelp' among the classes?
+    if (slidetst[0] == 'slidehelp') {
+        chngpage(arw);                                //If so, go to the changepage routine
+    };
+});
+
+shctrl.live('swipeleft swiperight',function(event){  //Catch left/right swipes in div.slidehelp
+    if (event.type == 'swipeleft') {                 //Was it a swipe to the left?
+        chngpage(39);                                //Change page as if it were right arrow
+    };
+    if (event.type == 'swiperight') {                //Was it a swipe to the right?
+        chngpage(37);                                //Change page as if it were left arrow
+    };
+});
+
+function chngpage(dir) {
+    //Get current page's ID. In this example, we start on "cooking1_2"
+    getid = $('.ui-page-active').attr('id');
+    //What is the "series name" of the current page? In this example: "cooking"
+    slideseries = getid.replace(/\d+_\d+/g,'');
+    //How many slides does this series have?
+    //Get the number AFTER the underscore to find out. In this example: 2
+    slidemax = parseInt((getid.replace(/\w+_/g,'')),10);
+    //What is the number of the current slide?
+    //Get the number BEFORE the underscore to find out. In "cooking1_2": 1
+    slidecur = parseInt(((getid.replace(/_\d+/g,'')).replace(/[A-Za-z]/g,'')),10);
+    //If we're moving to the right...
+    if (dir == 39) {
+        //Test by adding 1 to the current slide number
+        tstpeek = slidecur + 1;
+        //If we haven't exceeded the maximum number of slides...
+        if (tstpeek <= slidemax) {
+            //Generate a URL string for the next slide
+            newpg = '#' + slideseries + tstpeek.toString() + '_' + slidemax.toString();
+            //And change to it by sliding everything to the left
+            $.mobile.changePage( newpg, { transition: 'slide', reverse: false} );
+        }
+        else {
+            //Otherwise, tell user they're at the last page
+            alert('There is nothing else after this page.');
+        };
+    };
+    //If we're moving to the left...
+    if (dir == 37) {
+        //Test by subtracting 1 from the current slide number
+        tstpeek = slidecur - 1;
+        //If we're not trying to go back before slide 1...
+        if (tstpeek >= 1) {
+            //Generate the URL string for the previous slide
+            newpg = '#' + slideseries + tstpeek.toString() + '_' + slidemax.toString();
+            //And change to it by sliding everything to the right
+            $.mobile.changePage( newpg, { transition: 'slide', reverse: true} );
+        }
+        else {
+            //Otherwise, tell user they're at the first page
+            alert('There is nothing else before this page.');
+        };
+    };
+};
+});//]]> 
+
+</script>
+
+  
+</head>
+
+<body>
+  <!DOCTYPE html>
+<html>
+<body>
+<div data-role="page" id="cooking1_2" class="slidehelp">
+    <div data-role="header">
+        <h1>Side 1 (1/2)</h1>
+    </div>
+    <div data-role="content">
+        <p style="font-weight:bold;">Left Selection</p><br /><br />
+        <p class="keyinst">Press Right => </p>
+        <p class="touchinst">Swipe Right =></p>
+    </div>
+</div>
+<div data-role="page" id="cooking2_2" class="slidehelp">
+    <div data-role="header">
+        <h1>Side 2 (2/2)</h1>
+    </div>
+    <div data-role="content">
+        <p style="font-weight:bold;">Slide 2</p><br /><br />
+        <p>Welcome to page 2!</p>
+    </div>
+</div>
+</body>
+</html>
+  
+  <script>
+  // tell the embed parent frame the height of the content
+  if (window.parent && window.parent.parent){
+    window.parent.parent.postMessage(["resultsFrame", {
+      height: document.body.getBoundingClientRect().height,
+      slug: "None"
+    }], "*")
+  }
+</script>
+
+</body>
+
+</html>
+
