@@ -67,7 +67,6 @@ function set_date_space(dname, url) {
     }
     var text = get_date(url);
     var dp = document.getElementById(dput);
-    dp.style.
     dp.style.fontSize = '12px';
     dp.style.fontFamily = 'Poppins';
     dp.innerHTML = '<br><br>Content collected at: ' + text;
