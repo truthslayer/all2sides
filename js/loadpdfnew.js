@@ -144,12 +144,12 @@ function cnn_special(url, cvname, dname, cv2, d2, a, a2) {
 	    var gpdf = get_pdf(CNN);
 	    if (gpdf != null) {
 		given_pdf_cnn(pdf, url_new, cvname,
-			      dname, cv2, d2, a, a2, scalez);
+			      dname, cv2, d2, a, a2);
 	    } else {	// Asynchronous download of PDF 
 		PDFJS.getDocument('http://all2sides.com/' + url).then(pdf => {
 		    pdfDocument = pdf;
 		    set_correct_page(url, pdf);
-		    given_pdf_cnn(pdf, url_new, cvname, dname, cv2, d2, a, a2, scalez);
+		    given_pdf_cnn(pdf, url_new, cvname, dname, cv2, d2, a, a2);
 		});
 	    }
 	    return false;
@@ -281,7 +281,7 @@ function loadPdf(url, cvname, dname, cv2, d2, a, a2) {
     }
 };
 
-function given_pdf(pdf, url, cvname, dname, cv2, d2, a, a2, scalez) {
+function given_pdf(pdf, url, cvname, dname, cv2, d2, a, a2) {
     pdf.getPage(1).then(function (page) {
 //	console.log('here');
 	console.log(pdf + ' ' + url + ' ' + cvname + ' ' + dname + ' ' + cv2 + ' ' + d2 + ' ' + a + ' ' + a2);
