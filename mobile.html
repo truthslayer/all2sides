@@ -89,8 +89,52 @@ href="//production-assets.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41d
 
 <div id='mySwipe' style='max-width:500px;margin:0 auto' class='swipe'>
   <div class='swipe-wrap'>
-    <div><b>Div Left</b></div>
-    <div><b>Div Right</b></div>
+
+<div id="div_1">
+     <div id="date-space"></div>
+    <div id="wrapper">
+      <div id="loading"></div>
+      <div id="div-cnn" class="pdf-content">
+       <canvas id="cnn-canvas" ></canvas>
+       <div id="div-cnn-annote" class="annotationLayer"></div>
+     </div>
+     <div id="div-nytimes" class="pdf-content">
+       <canvas id="nytimes-canvas" ></canvas>
+       <div id="div-nytimes-annote" class="annotationLayer"></div>
+     </div>
+     <div id="div-fox" class="pdf-content">
+       <canvas id="fox-canvas" ></canvas>
+       <div id="div-fox-annote" class="annotationLayer"></div>
+     </div>
+     <div id="div-wsj" class="pdf-content">
+       <canvas id="wsj-canvas"></canvas>
+       <div id="div-wsj-annote" class="annotationLayer"></div>
+     </div>
+     <div id="div-wapo" class="pdf-content">
+       <canvas id="wapo-canvas" ></canvas>
+       <div id="div-wapo-annote"  class="annotationLayer"></div>
+     </div>
+    </div>
+    <div id="form">
+      Contact us!
+      <br>
+    <form id="contactform" action="//formspree.io/all2sides@gmail.com" method="POST">
+      <input type="text" name="name" placeholder="Your name">
+      <br>
+      <input type="email" name="_replyto" placeholder="Your email">
+      <br>
+    <textarea name="message" placeholder="Your message"></textarea>
+    <input type="hidden" name="_subject" value="Website contact" />
+    <input type="text" name="_gotcha" style="display:none" />
+    <input type="submit" value="Send">
+    </form>
+    </div>
+<script>
+    var contactform =  document.getElementById('contactform');
+    contactform.setAttribute('action', '//formspree.io/' + 'all2sides@gmail.com');
+</script>
+</div>
+<div><b>Div Right</b></div>
   </div>
 </div>
 
