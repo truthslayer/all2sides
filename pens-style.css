@@ -173,13 +173,6 @@ h1 {
 	background-color: #49447A;
 }
 
-#div_1 {
-	width: 70%;  
-}
-
-#div_2 {
-	width: 70%;
-}   
 
 #buttons-both {
     width:90%;
@@ -237,17 +230,7 @@ only screen and (min-device-width: 768px) and (max-device-width: 1024px)
 and (orientation : landscape)
 {
     #top-border, #bottom-border, #left-border, #right-border { display: none; }
-
-    #div_1 {
-	margin-left: 0px;
-    }
-     #div_2 {
-	margin-right: 0px;
-    }
-    
-#div_1, #div_2 {
-	width: 70%;  
-}
+ 
 
 @media 
 		
@@ -282,17 +265,8 @@ and (orientation : landscape)
 {
     #top-border, #bottom-border, #left-border, #right-border { display: none; }
 
+
     
-#div_1 {
-    margin-left: 5px;
-    width: 70%;  
-}
-
- #div_2 {
-     width: 70%;
-     margin-right: 5px;
- }
-
  
 html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, del, dfn, em, img, ins, kbd, q, samp, small, strong, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, table, tbody, tfoot, thead, tr, th, td, article, aside, footer, header, nav, section {
     margin: 0;
