@@ -5,7 +5,7 @@ var isMobile = false; //initiate as false
 
 if (isMobile == true) {
     if (confirm("Would you like to try our mobile version?")) {
-
+	window.location.href = "http://all2sides.com/backup/mobile.html";
     } 
 }
 
