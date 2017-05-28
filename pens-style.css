@@ -161,12 +161,6 @@ body {
     width: 40%;
 }
 
-#rest {
-    width:90%;
-    margin-left: 40px;
-    margin-right: 400px;
-}
-
 h1 {
 	margin-left: 30%;
 	margin-right: 40%;
@@ -180,19 +174,15 @@ h1 {
 }
 
 #div_1 {
-	display: inline-block;
-//	float: left;
-	width: 80%;  
+	width: 70%;  
 }
 
 #div_2 {
-	display: inline-block;
-//   	float: right;
-	width: 80%;
+	width: 70%;
 }   
 
 #buttons-both {
-    width:100%;
+    width:90%;
     margin-left: 0px;
     margin-right: 0px;	
 }
@@ -254,14 +244,9 @@ and (orientation : landscape)
      #div_2 {
 	margin-right: 0px;
     }
- #rest {
-     width:90%;
-     margin-right:10px;
-     margin-left:10px;
-    }
     
 #div_1, #div_2 {
-	width: 80%;  
+	width: 70%;  
 }
 
 @media 
@@ -297,20 +282,14 @@ and (orientation : landscape)
 {
     #top-border, #bottom-border, #left-border, #right-border { display: none; }
 
-
-    #rest {
-	width:90%;
-	margin-left: 0px;
-	margin-right: 0px;
-    }
     
 #div_1 {
     margin-left: 5px;
-    width: 80%;  
+    width: 70%;  
 }
 
  #div_2 {
-     width: 80%;
+     width: 70%;
      margin-right: 5px;
  }
 
@@ -331,45 +310,6 @@ body {
   min-height: 416px;
 }
 
-h1 {
-  font-size: 33px;
-  margin: 50px 0 15px;
-  text-align: center;
-  color: #212121;
-}
-
-h2 {
-  font-size: 14px;
-  font-weight: bold;
-  color: #3c3c3c;
-  margin: 20px 10px 10px;
-}
-
-small {
-  margin: 0 10px 30px;
-  display: block;
-  font-size: 12px;
-}
-
-a {
-  margin: 0 0 0 10px;
-  font-size: 12px;
-  color: #3c3c3c;
-}
-
-html, body {
-  background: #f3f3f3;
-}
-
-#console {
-  font-size: 12px;
-  font-family: "Inconsolata", "Monaco", "Consolas", "Andale Mono", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
-  color: #999;
-  line-height: 18px;
-  margin-top: 20px;
-  max-height: 150px;
-  overflow: auto;
-}
 
 #mySwipe div b {
   display: block;
