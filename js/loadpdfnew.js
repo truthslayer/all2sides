@@ -1,3 +1,8 @@
+var scalez = .8;
+if (isMobile) {
+    scalez = .7;
+};
+
 function get_name(url) {
     if (url.includes("cnn")) {
 	return CNN;
@@ -121,7 +126,7 @@ function cnn_special(url, cvname, dname, cv2, d2, a, a2) {
 	    if (gpdf != null) {
 		// we already have a pdf
 		given_pdf(pdf, url, cvname,
-			      dname, cv2, d2, a, a2);
+			  dname, cv2, d2, a, a2);
 	    } else {
 		// don't yet have a pdf
 		PDFJS.getDocument('http://all2sides.com/' + url).then(pdf => {
@@ -139,12 +144,12 @@ function cnn_special(url, cvname, dname, cv2, d2, a, a2) {
 	    var gpdf = get_pdf(CNN);
 	    if (gpdf != null) {
 		given_pdf_cnn(pdf, url_new, cvname,
-			      dname, cv2, d2, a, a2);
+			      dname, cv2, d2, a, a2, scalez);
 	    } else {	// Asynchronous download of PDF 
 		PDFJS.getDocument('http://all2sides.com/' + url).then(pdf => {
 		    pdfDocument = pdf;
 		    set_correct_page(url, pdf);
-		    given_pdf_cnn(pdf, url_new, cvname, dname, cv2, d2, a, a2);
+		    given_pdf_cnn(pdf, url_new, cvname, dname, cv2, d2, a, a2, scalez);
 		});
 	    }
 	    return false;
@@ -174,7 +179,7 @@ function given_pdf_cnn(pdf, url, cvname, dname, cv2, d2, a, a2) {
 	var pdfContainer = document.getElementById(dname);
 	var ldiv = document.getElementById('div_1');
 //	console.log('ldiv ' + ldiv.offsetWidth + 'viewport w' + viewport.width);
-	var sc = ldiv.clientWidth * .7 / viewport.width;
+	var sc = ldiv.clientWidth * scalez / viewport.width;
 //	console.log('scale ' + sc + ' means width is ' + viewport.width * sc);
 	pdfContainer.style.width = Math.floor(viewport.width * sc) + 'pt';
 	pdfContainer.style.height = Math.floor(viewport.height * sc) + 'pt';
@@ -276,7 +281,7 @@ function loadPdf(url, cvname, dname, cv2, d2, a, a2) {
     }
 };
 
-function given_pdf(pdf, url, cvname, dname, cv2, d2, a, a2) {
+function given_pdf(pdf, url, cvname, dname, cv2, d2, a, a2, scalez) {
     pdf.getPage(1).then(function (page) {
 //	console.log('here');
 	console.log(pdf + ' ' + url + ' ' + cvname + ' ' + dname + ' ' + cv2 + ' ' + d2 + ' ' + a + ' ' + a2);
@@ -296,7 +301,7 @@ function given_pdf(pdf, url, cvname, dname, cv2, d2, a, a2) {
 	var pdfContainer = document.getElementById(dname);
 	var ldiv = document.getElementById('div_1');
 //	console.log('ldiv ' + ldiv.offsetWidth + 'viewport w' + viewport.width);
-	var sc = ldiv.clientWidth * .7 / viewport.width;
+	var sc = ldiv.clientWidth * scalez / viewport.width;
 //	console.log('scale ' + sc + ' means width is ' + viewport.width * sc);
 	pdfContainer.style.width = Math.floor(viewport.width * sc) + 'pt';
 	pdfContainer.style.height = Math.floor(viewport.height * sc) + 'pt';
