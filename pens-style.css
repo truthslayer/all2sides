@@ -152,13 +152,11 @@ body {
 
 #loading {
     position: absolute;
-    width: 40%;
 }
 
 
 #loading-right {
     position: absolute;
-    width: 40%;
 }
 
 h1 {
@@ -218,7 +216,25 @@ h1 {
 }
 #top-border{ top: 0; }
 #bottom-border { bottom: 0; }
-				
+
+
+#div_1 {
+	display: inline-block;
+	float: left;
+	width: 45%;  
+}
+
+#div_2 {
+	display: inline-block;
+   	float: right;
+	width: 45%;
+}
+
+#rest {
+    width:100%;
+    margin-left: 10px;
+    margin-right: 10px;
+}
 @media 
 		
 /* Fairly small screens including iphones */
@@ -275,11 +291,12 @@ and (orientation : landscape)
   position: relative;
 }
 .swipe-wrap {
+  width: 60%;
   overflow: hidden;
   position: relative;
 }
 .swipe-wrap > div {
   float:left;
-  width:100%;
+  width:60%;
   position: relative;
 }
