@@ -180,13 +180,12 @@ h1 {
 #buttons {
 	display: inline-block;
 	float: left;
-	width: 40%;  
 }
 
 #buttons-right {
 	display: inline-block;
    	float: right;
-	width: 40%;
+	border-right: 40px;
 }   
 
 #left-border {
