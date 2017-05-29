@@ -23,6 +23,39 @@ var prefix, hprefix = "news-clips/";
 var cdate = "";
 
 
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] === sParam) {
+	    return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+};
+
+function notone(name) {
+    return  !(name == CNN || name == FOX || name == WAPO || name == WSJ || name == NYT);
+}
+
+var urldate = getUrlParameter('date');
+var udate = urldate;
+if (urldate == "") {
+    udate = new Date();
+}
+var urlleft =  getUrlParameter('left');
+var urlright =  getUrlParameter('right');
+console.log('date = ' + urldate + 'left = ' + urlleft + 'right = ' + urlright);
+if (notone(urlleft)) {
+    alert("Left name of news-site not valid. Please use one of cnn/foxnews/wapo/wsj/nytimes.");
+}
+if (notone(urlright)) {
+    alert("Right name of news-site not valid. Please use one of cnn/foxnews/wapo/wsj/nytimes.");
+}
+
+
 var s3 = new AWS.S3();
 
 window.onload=function(){
@@ -383,10 +416,13 @@ window.onload=function(){
 
  
 
-function date_obj_now() {
-    return moment().tz('America/New_York');
-}
+    function date_obj_now() {
+	return moment().tz('America/New_York');
+    }
 
+    function date_obj_url(yyyymmddhh) {
+    }
+    
 function date_now() {
     var lT = moment().tz('America/New_York');
     return(lT.format("YYYY-MM-DD"));
@@ -457,6 +493,15 @@ function dt_now() {
 	}
     }
 
+    function set_date(val) {
+	if (!val.match(/....-..-..\...\//)) {
+	    alert('Poorly formatted date in url. Must have \'YYYY-MM-DD.HH/\'');
+	}  else {
+	    cdate = hprefix + val;
+	    do_loads();
+	}
+    }
+
     
     // datepicker
     var checkin = $('.dpd1').datepicker()
@@ -478,9 +523,14 @@ function dt_now() {
 	var attempt = $(this).datepicker('getDate');
 	var mom = moment(attempt);
 	if_today(mom, this.value);
-    }).datepicker("setDate", new Date());
-	var m = date_obj_now();
-	check_get_dates(m);
+    }).datepicker("setDate", new Date(udate));
+	var m = moment(urldate, "YYYY-MM-DD.HH/");
+	if (!m.isValid) {
+	    m = date_obj_now();
+	    if_today(m);
+	}  else {
+	    set_date(urldate);
+	}
     });
 
     $(document).ready(function () {
@@ -488,7 +538,7 @@ function dt_now() {
 	    e.target.target = '_blank';
 	});
 
-	$("#mydate").datepicker().datepicker( "setDate", new Date());
+//	$("#mydate").datepicker().datepicker( "setDate", new Date());
     });
 
 }
