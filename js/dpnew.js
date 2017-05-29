@@ -381,10 +381,10 @@ function do_loads() {
 function check_get_dates(dcurr) {
     if (!today(dcurr)) {
 //	alert('call check get dates only with today!' + dcurr.format("YYY-MM-DD:HH"));
-    }
-    if (dcurr.hours() == 0) {
+//    }
+ //   if (dcurr.hours() == 0) {
 	//  yesterday
-	cdate = 'news_clips/' + date_yesterday() + '.23/'; 
+	cdate = 'news-clips/' + date_yesterday() + '.23/'; 
 	// load pdfs
 	do_loads();
     }

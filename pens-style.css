@@ -185,7 +185,7 @@ h1 {
 #buttons-right {
 	display: inline-block;
    	float: right;
-	border-right: 40px;
+	margin-right: 80px;
 }   
 
 #left-border {
