@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <iframe
+        width="710"
+        height="1260"
+        <!-- Modiy the address and/or the other parameters to your needs -->
+        src="http://maps.google.de/maps?hl=en&q=New York&ie=UTF8&t=h&z=13&iwloc=B&output=embed"
+        frameborder="0"
+        scrolling="no"
+        marginheight="0"
+        marginwidth="0" 
+        frameborder="0" >
+    </iframe>
+</body>
+</html>
