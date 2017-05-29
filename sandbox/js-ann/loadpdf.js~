@@ -1,0 +1,90 @@
+function loadPdf(url, cvname) {
+// The workerSrc property shall be specified.
+PDFJS.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
+
+// Asynchronous download of PDF
+var loadingTask = PDFJS.getDocument(url);
+loadingTask.promise.then(function(pdf) {
+  console.log('PDF loaded');
+  
+  // Fetch the first page
+  var pageNumber = 1;
+  pdf.getPage(pageNumber).then(function(page) {
+    console.log('Page loaded');
+    
+    var scale = 1;
+    var viewport = page.getViewport(scale);
+
+    // Prepare canvas using PDF page dimensions
+    var canvas = document.getElementById(cvname);
+    var context = canvas.getContext('2d');
+    canvas.height = viewport.height;
+    canvas.width = viewport.width * 1;
+
+    // Render PDF page into canvas context
+    var renderContext = {
+      canvasContext: context,
+      viewport: viewport
+    };
+    var renderTask = page.render(renderContext);
+    renderTask.then(function () {
+      console.log('Page rendered');
+    });
+  });
+}, function (reason) {
+  // PDF loading error
+  console.error(reason);
+}
+)};
+
+
+function loadPdfTwo(url, cv, cv2) {
+// The workerSrc property shall be specified.
+PDFJS.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
+
+// Asynchronous download of PDF
+var loadingTask = PDFJS.getDocument(url);
+loadingTask.promise.then(function(pdf) {
+  console.log('PDF loaded');
+  
+  // Fetch the first page
+  var pageNumber = 1;
+  pdf.getPage(pageNumber).then(function(page) {
+    console.log('Page loaded');
+    
+    var scale = 1;
+    var viewport = page.getViewport(scale);
+
+    // Prepare canvas using PDF page dimensions
+      var canvas = document.getElementById(cv);
+      var canvas2 = document.getElementById(cv2);
+      var context = canvas.getContext('2d');
+      var context2 = canvas2.getContext('2d');
+      canvas.height = viewport.height;
+      canvas.width = viewport.width * 1;
+      canvas2.height = viewport.height;
+      canvas2.width = viewport.width * 1;
+
+    // Render PDF page into canvas context
+    var renderContext = {
+      canvasContext: context,
+      viewport: viewport
+    };
+      var renderContext2 = {
+      canvasContext: context2,
+      viewport: viewport
+    };
+    var renderTask = page.render(renderContext);
+    renderTask.then(function () {
+      console.log('Page rendered');
+    });
+      var renderTask2 = page.render(renderContext2);
+      renderTask2.then(function () {
+	  console.log('Page rendered twice');
+      });
+  });
+}, function (reason) {
+  // PDF loading error
+  console.error(reason);
+}
+)};
