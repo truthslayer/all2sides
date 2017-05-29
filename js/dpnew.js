@@ -107,6 +107,36 @@ window.onload=function(){
     d5right.style.display = "none";
     var a5right = document.getElementById('div-wapo-annote-right');
 
+    function url_date(date) {
+	var stateObj = { index: "index" };
+	var pathname = window.location.href; // Returns path only
+	var np = pathname.replace(/(&date=.+?)(&|$)/, '&date=' + date+ "$2");
+	if (!np.match(/.*&date.*/)) {
+	    np = np + "?&date=" + date;
+	}
+	history.pushState(stateObj, "remembering date", np);
+    }
+    
+    function url_left(name) {
+	var stateObj = { index: "index" };
+	var pathname = window.location.href; // Returns full url
+	var np = pathname.replace(/(&left=.+?)(&|$)/, '&left=' + name + "$2");
+	if (!np.match(/.*&left.*/)) {
+	    np = np + "&left=" + name;
+	}
+	history.pushState(stateObj, "remembering date", np);
+    }
+
+    function url_right(name) {
+	var stateObj = { index: "index" };
+	var pathname = window.location.href; // Returns full url
+	var np = pathname.replace(/(&right=.+?)(&|$)/, '&right=' + name + "$2" );
+	if (!np.match(/.+&right.+/)) {
+	    np = np + "&right=" + name;
+	}
+	history.pushState(stateObj, "remembering date", np);
+    }
+    
     // All the swaps on the radio clicks
     document.getElementById("cnn").onclick=function(){
 	cnnl = swap_l(CNN, cnn, cnnl, cnnr);
@@ -290,6 +320,7 @@ window.onload=function(){
     }
     
     function swap_l(name, url, bl, br) {
+	url_left(name);
 	hide_all();
 	var can1 = name + '-canvas';
 	var div1 = 'div-' + name;
@@ -322,6 +353,7 @@ window.onload=function(){
     };
 
     function swap_r(name, url, bl, br) {
+	url_right(name);
 	var can1 = name + '-canvas-right';
 	var div1 = 'div-' + name + '-right';
 	var can2 = name + '-canvas';
@@ -378,17 +410,12 @@ function do_loads() {
     render_right();
 }
 
-    function add_date_url(date) {
-	var stateObj = { index: "index" };
-	history.pushState(stateObj, "remembering date", "index.html?" + date);
-    }
-
     
 function check_get_dates(dcurr) {
     if (!today(dcurr)) {
 	var c = date_yesterday() + '.23/'; 
 	cdate = 'news-clips/' + c;
-	add_date_url(c);
+	url_date(c);
 	// load pdfs
 	do_loads();
     }
@@ -405,7 +432,7 @@ function check_get_dates(dcurr) {
 	} else {
 	    cdate = all_but;
 	    // load pdfs
-	    add_date_url(dtj);
+	    url_date(dtj);
 	    do_loads();
 	}
     });
@@ -425,7 +452,7 @@ function dt_now() {
 	} else  {
 	    dtn = val + ".23";
 	    cdate = hprefix + dtn + "/";
-	    add_date_url(dtn);
+	    url_date(dtn + '/');
 	    do_loads();
 	}
     }
