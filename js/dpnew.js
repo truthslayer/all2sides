@@ -494,7 +494,7 @@ function dt_now() {
     }
 
     function set_date(val) {
-	if (!val.match(/....-..-..\...\//)) {
+	if (val == null || !val.match(/....-..-..\...\//)) {
 	    alert('Poorly formatted date in url. Must have \'YYYY-MM-DD.HH/\'');
 	}  else {
 	    cdate = hprefix + val;
@@ -525,7 +525,7 @@ function dt_now() {
 	if_today(mom, this.value);
     }).datepicker("setDate", new Date(udate));
 	var m = moment(urldate, "YYYY-MM-DD.HH/");
-	if (!m.isValid) {
+	if (!m.isValid()) {
 	    m = date_obj_now();
 	    if_today(m);
 	}  else {
