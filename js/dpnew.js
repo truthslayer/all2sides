@@ -378,13 +378,17 @@ function do_loads() {
     render_right();
 }
 
+    function add_date_url(date) {
+	var stateObj = { index: "index" };
+	history.pushState(stateObj, "remembering date", "index.html?" + date);
+    }
+
+    
 function check_get_dates(dcurr) {
     if (!today(dcurr)) {
-//	alert('call check get dates only with today!' + dcurr.format("YYY-MM-DD:HH"));
-//    }
- //   if (dcurr.hours() == 0) {
-	//  yesterday
-	cdate = 'news-clips/' + date_yesterday() + '.23/'; 
+	var c = date_yesterday() + '.23/'; 
+	cdate = 'news-clips/' + c;
+	add_date_url(c);
 	// load pdfs
 	do_loads();
     }
@@ -401,6 +405,7 @@ function check_get_dates(dcurr) {
 	} else {
 	    cdate = all_but;
 	    // load pdfs
+	    add_date_url(dtj);
 	    do_loads();
 	}
     });
@@ -410,7 +415,9 @@ function dt_now() {
     var lT = moment().tz('America/New_York');
     return(lT.format("YYYY-MM-DD.HH"));
 }
+
     
+
     function if_today(att, val) {
 	if (today(att)) {
 	    var lT = moment().tz('America/New_York');
@@ -418,57 +425,12 @@ function dt_now() {
 	} else  {
 	    dtn = val + ".23";
 	    cdate = hprefix + dtn + "/";
+	    add_date_url(dtn);
 	    do_loads();
 	}
     }
 
     
-    // old
-/*    
-    jQuery(function($) {
-	$(".date").datepicker({
-            maxDate : 0,
-	    dateFormat: "yy-mm-dd",
-	    onSelect: function(dateText) {
-		var attempt = $(this).datepicker('getDate');
-		var dtn = dt_now();
-		if (!today(attempt)) {
-		    dtn = this.value + ".23";
-		}
-		var coeff = hprefix + dtn + "/";
-		all_false();
-		all_falseright();
-		release_pdfs();
-		cdate = coeff;
-		render_rightright();
-		render_right();
-	    }
-	}).on("change", function() {
-	var attempt = $(this).datepicker('getDate');
-	var dtn = dt_now();
-	if (!today(attempt)) {
-	    dtn = this.value + ".23";
-	}
-	var coeff = hprefix + dtn + "/";
-	all_false();
-	all_falseright();
-	cdate = coeff;
-	release_pdfs();
-	render_rightright();
-	render_right();
-
-    }).datepicker("setDate", new Date());
-    var prefix = "news-clips/";
-    var hprefix = prefix;
-    var dtn = dt_now();
-    var coeff = hprefix + dtn + "/";
-    all_false();
-    all_falseright();
-    cdate = coeff;
-    release_pdfs();
-    render_rightright();
-    render_right();     
-    }); */
     // datepicker
     var checkin = $('.dpd1').datepicker()
 	.on('click', function (ev) {
