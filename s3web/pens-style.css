@@ -182,11 +182,6 @@ h1 {
 	float: left;
 }
 
-#buttons-right {
-	display: inline-block;
-   	float: right;
-	margin-right: 80px;
-}   
 
 #left-border {
     left: 0;
@@ -220,13 +215,11 @@ h1 {
 #div_1 {
 	display: inline-block;
 	float: left;
-	width: 45%;  
+	width: 95%;  
 }
 
-#div_2 {
-	display: inline-block;
-   	float: right;
-	width: 45%;
+#div-cnn, #div-nytimes, #div-fox, #div-wapo, #div-wsj {
+    width: 100%;
 }
 
 #rest {
@@ -290,12 +283,12 @@ and (orientation : landscape)
   position: relative;
 }
 .swipe-wrap {
-  width: 60%;
+  width: 90%;
   overflow: hidden;
   position: relative;
 }
 .swipe-wrap > div {
   float:left;
-  width:60%;
+  width:90%;
   position: relative;
 }

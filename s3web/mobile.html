@@ -1,9 +1,7 @@
 <!DOCTYPE html><html class=''>
   <head>
  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'/> 
-<meta http-equiv="X-UA-Compatible" content="IE=8">
-
-<!--<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css'>-->
+<title>All2Sides</title>
 <link rel="stylesheet" href="pens-style.css">
 
   <link rel="stylesheet" href="annotations.css">
@@ -13,88 +11,82 @@
 <script src="js/aws-sdk-2.7.18.min.js"></script>
 <script type="text/javascript" src="js/mob-mob.js"> </script>
   <script type="text/javascript" src="js/justcred.js"></script>
-  <script type="text/javascript" src="js/loadpdfnew.js"></script>
+  <script type="text/javascript" src="js/loadpdfmobile.js"></script>
   <script type="text/javascript" src="js/moment.js"></script>    
   <script type="text/javascript" src="js/moment-timezone.js"></script>
-  <script type="text/javascript" src="js/dpnew.js"> </script>
-  
+  <script type="text/javascript" src="js/dpmobile.js"> </script>  
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="js-ann/old-pdf.min.js"></script>
   <script type="text/javascript" src="js-ann/old.ui_utils.js"></script>
   <script type="text/javascript" src="js-ann/text_layer_builder.min.js"></script>
   <script src="js-ann/old-pdf.min.worker.js"></script>
-<meta name=”viewport” content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-</head><body>
+  <script type="text/javascript" src="js/swipe.js"></script>
+
+  <meta name=”viewport” content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  </head>
 
 
-
+  <body>
     <h1>All2Sides</h1>
 
-  <div id="rest">
-    <div id="dates">
+    <div id="rest">
+      <div id="dates">
+	<p>
+	  <span class="location" data-tz="America/New_York">Pick a
+	    Date: </span>
+	<p>
+	  <link href="https://code.jquery.com/ui/1.9.2/themes/smoothness/jquery-ui.css"
+		rel="stylesheet" />
+	  <input type='text' class='date'></div>
       <p>
-	<span class="location" data-tz="America/New_York">Pick a Date: </span>
-      <p>
-	<link href="https://code.jquery.com/ui/1.9.2/themes/smoothness/jquery-ui.css" rel="stylesheet" />
-	<input type='text' class='date'></div>
-    <p>
 
 
-<div id="left-border"></div>
-<div id="right-border"></div>
-<div id="bottom-border"></div>
-<div id="top-border"></div>
-
+      <div id="left-border"></div>
+      <div id="right-border"></div>
+      <div id="bottom-border"></div>
+      <div id="top-border"></div>
+      
    
-<div style='text-align:center;padding-top:20px;'>
-  <button onclick='mySwipe.prev()'>Left Selection</button> 
-  <button onclick='mySwipe.next()'>Right Selection</button>
-</div>
-
-<div id="rest">
-
-<div id='slider' class='swipe' width="100%">
-  <div class='swipe-wrap'>
-
-    <div id="div_1" width="80%">
-      <div id="buttons" class="cc-selector">
-	<input id="cnn" value="cnn" type="radio" name="group1" checked="checked"/>
-	<label class="drinkcard-cc cnn" for="cnn"></label>
-	<input id="nytimes" value="nytimes" type="radio" name="group1"/>
-	<label class="drinkcard-cc nytimes" for="nytimes"></label>
-	<input id="fox" value="fox" type="radio" name="group1"/>
-	<label class="drinkcard-cc fox" for="fox"></label>
-	<input id="wsj"  value="wsj" type="radio" name="group1"/>
-	<label class="drinkcard-cc wsj" for="wsj"></label>
-	<input id="wapo" value="wapo" type="radio" name="group1"/>
-	<label class="drinkcard-cc wapo" for="wapo"></label>
+      <div style='text-align:center;padding-top:20px;'>
+	<button onclick='mySwipe.prev()'>Move Left (or swipe left)</button>
+	<button onclick='mySwipe.next()'>Move Right (or swipe right)</button>
       </div>
 
-      <div id="date-space"></div>
-      <div id="wrapper">
+      <div id="div_1">
+	<div id="date-space"></div>
 	<div id="loading"></div>
-	<div id="div-cnn" class="pdf-content">
-	  <canvas id="cnn-canvas" ></canvas>
-	  <div id="div-cnn-annote" class="annotationLayer"></div>
-	</div>
-	<div id="div-nytimes" class="pdf-content">
-	  <canvas id="nytimes-canvas" ></canvas>
-	  <div id="div-nytimes-annote" class="annotationLayer"></div>
-	</div>
-	<div id="div-fox" class="pdf-content">
-	  <canvas id="fox-canvas" ></canvas>
-	  <div id="div-fox-annote" class="annotationLayer"></div>
-	</div>
-	<div id="div-wsj" class="pdf-content">
-	  <canvas id="wsj-canvas"></canvas>
-	  <div id="div-wsj-annote" class="annotationLayer"></div>
-	</div>
-	<div id="div-wapo" class="pdf-content">
-	  <canvas id="wapo-canvas" ></canvas>
-	  <div id="div-wapo-annote"  class="annotationLayer"></div>
+	<div id='slider' class='swipe'>
+	  <div class='swipe-wrap'>
+	    <div id="div-cnn" class="pdf-content">
+	      <canvas id="cnn-canvas" ></canvas>
+	      <div id="div-cnn-annote" class="annotationLayer"></div>
+	    </div>
+	    <div id="div-nytimes" class="pdf-content">
+	      <canvas id="nytimes-canvas" ></canvas>
+	      <div id="div-nytimes-annote"
+	      class="annotationLayer"></div>
+	    </div>
+	    <div id="div-fox" class="pdf-content">
+	      <canvas id="fox-canvas" ></canvas>
+	      <div id="div-fox-annote" class="annotationLayer"></div>
+	    </div>
+	    <div id="div-wsj" class="pdf-content">
+	      <canvas id="wsj-canvas"></canvas>
+	      <div id="div-wsj-annote" class="annotationLayer"></div>
+	    </div>
+	    <div id="div-wapo" class="pdf-content">
+	      <canvas id="wapo-canvas" ></canvas>
+	<div id="div-wapo-annote" class="annotationLayer"></div>
+      </div>
+   
+      </div>
+    </div>
 	</div>
       </div>
-      <div id="form">
+   
+
+
+         <div id="form">
 	Contact us!
 	<br>
 	<form id="contactform" action="//formspree.io/all2sides@gmail.com" method="POST">
@@ -102,65 +94,17 @@
 	  <br>
 	  <input type="email" name="_replyto" placeholder="Your email">
 	  <br>
-	  <textarea name="message" placeholder="Your message"></textarea>
-	  <input type="hidden" name="_subject" value="Website contact" />
-	  <input type="text" name="_gotcha" style="display:none" />
+	  <textarea name="message" placeholder="Your
+	  message"></textarea> <input type="hidden" name="_subject"
+	  value="Website contact" /> <input type="text" name="_gotcha"
+	  style="display:none" />
 	  <input type="submit" value="Send">
 	</form>
-      </div>
-      <script>
-	var contactform =  document.getElementById('contactform');
-	contactform.setAttribute('action', '//formspree.io/' + 'all2sides@gmail.com');
-      </script>
-    </div>
-
-  
-    <div id="div_2" width="80%">
-      <div id="buttons-right" class="cc-selector-2">
-	<input id="cnn-right" value="cnn" type="radio" name="group1right"/>
-	<label class="drinkcard-cc cnn" for="cnn-right"></label>
-	<input id="nytimes-right" value="nytimes" type="radio" name="group1right"/>
-	<label class="drinkcard-cc nytimes" for="nytimes-right"></label>
-	<input id="fox-right" value="fox" type="radio" name="group1right"  checked="checked"/>
-	<label class="drinkcard-cc fox" for="fox-right"></label>
-	<input id="wsj-right"  value="wsj" type="radio" name="group1right"/>
-	<label class="drinkcard-cc wsj" for="wsj-right"></label>
-	<input id="wapo-right" value="wapo" type="radio" name="group1right"/>
-	<label class="drinkcard-cc wapo" for="wapo-right"></label>
-      </div>
-      <div id="date-space-right"></div>
-      <div id="wrapper-right">
-	<div id="loading-right"></div>
-	<div id="div-cnn-right" class="pdf-content">
-	  <canvas id="cnn-canvas-right" ></canvas>
-	  <div id="div-cnn-annote-right" class="annotationLayer"></div>
-	</div>
-	<div id="div-nytimes-right" class="pdf-content">
-	  <canvas id="nytimes-canvas-right" ></canvas>
-	  <div id="div-nytimes-annote-right" class="annotationLayer"></div>
-	</div>
-	<div id="div-fox-right" class="pdf-content">
-	  <canvas id="fox-canvas-right" ></canvas>
-	  <div id="div-fox-annote-right" class="annotationLayer"></div>
-	</div>
-	<div id="div-wsj-right" class="pdf-content">
-	  <canvas id="wsj-canvas-right"></canvas>
-	  <div id="div-wsj-annote-right" class="annotationLayer"></div>
-	</div>
-	<div id="div-wapo-right" class="pdf-content">
-	  <canvas id="wapo-canvas-right" ></canvas>
-	  <div id="div-wapo-annote-right" class="annotationLayer"></div>
-	</div>
-      </div>
-    </div>
-
-  </div>
-</div>
 </div>
 
-
-
-  <script type="text/javascript" src="js/swipe.js"></script>
+	 
   <script type="text/javascript" src="js/swipes.js"></script>
 
-</body></html>
+
+</body>
+</html>

@@ -1,3 +1,8 @@
 window.mySwipe = Swipe(document.getElementById('slider'), {
-     continuous: false,
-});
+    continuous: true,
+    callback: function(index, element) {
+	console.log('index' + index + ' element ' + element);
+	    get_loaded(element);
+	},
+    });
+
