@@ -62,16 +62,16 @@ function get_url(name) {
 }
 
 function get_scale(name) {
-     if (name == CNN) {
-	return 0.8;
+  if (name == CNN) {
+	return 1.0;
     } else if (name == FOX) {
-	return 1.7;
+	return 2.0;
     } else if (name == NYT) {
-	return 1.3;
+	return 1.5;
     } else if (name == WSJ) {
-	return 1.3;
+	return 1.5;
     } else if (name == WAPO) {
-	return 1.3;
+	return 1.5;
     } else {
 	alert('wtf');
 	return 1.0;
@@ -237,7 +237,6 @@ function given_pdf(pdf, url, cvname, dname, cv2, d2, a, a2) {
 	var annote = document.getElementById(a);
 	annote.style.width = Math.floor(viewport.width * sc) + 'pt';
 	annote.style.height = Math.floor(viewport.height * sc) + 'pt';
-
 
 	setupAnnotations(page, viewport, cvname, annote,   1.33  * sc * scale);
 	var renderContext = {

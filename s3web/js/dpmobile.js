@@ -62,7 +62,7 @@ var s3 = new AWS.S3();
 window.onload=function(){
     // to fix the sizing.
     window.onorientationchange = function() {
-	mySwipe.slide(0, 1);
+	$('.your-class').slick('slickGoTo', 0);
 	do_loads();
     };
  
@@ -364,22 +364,20 @@ function dt_now() {
 	onSelect: function(dateText) {
 	    var attempt = $(this).datepicker('getDate');
 	    var mom = moment(attempt);
-	    mySwipe.slide(0, 1);
+	    $('.your-class').slick('slickGoTo', 0);
 	    if_today(mom, this.value);
 	}
     }).on("change", function() {
 	var attempt = $(this).datepicker('getDate');
 	var mom = moment(attempt);
-	mySwipe.slide(0, 1);
+	$('.your-class').slick('slickGoTo', 0);
 	if_today(mom, this.value);
     }).datepicker("setDate", new Date(udate));
 	var m = moment(urldate, "YYYY-MM-DD.HH/");
 	if (!m.isValid()) {
 	    m = date_obj_now();
-//	    mySwipe.slide(0, 1);
 	    if_today(m);
 	}  else {
-//	    mySwipe.slide(0, 1);
 	    set_date(urldate);
 	}
     });
