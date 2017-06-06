@@ -219,6 +219,8 @@ h1 {
 }
 
 #div-cnn, #div-nytimes, #div-fox, #div-wapo, #div-wsj {
+    -webkit-transform: translate3d(0,0,0);
+    position: relative;
     width: 100%;
 }
 
