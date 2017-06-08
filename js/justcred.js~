@@ -1,5 +1,5 @@
 var creds = new AWS.CognitoIdentityCredentials({
-    IdentityPoolId: 'us-east-1:c6ca0499-44f0-4cdb-84ae-175b2a0781a8' 
+    IdentityPoolId: 'us-east-1:1699ebc0-7900-4099-b910-2df94f52a030'
 })
 
 
