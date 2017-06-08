@@ -1,13 +1,3 @@
-var isMobile = false; //initiate as false
-// device detection
-    if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|ipad|iris|kindle|Android|Silk|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(navigator.userAgent) 
-    	|| /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(navigator.userAgent.substr(0,4))) isMobile = true;
-
-if (isMobile == false) {
-    if (confirm("Would you like to see our desktop version?")) {
-	window.location.href = "http://all2sides.com/backup/index.html";
-    } 
-}
 
 // "macros"
 var CNN = "cnn";
@@ -32,12 +22,47 @@ var wapop = null;
 var prefix, hprefix = "news-clips/";
 var cdate = "";
 
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] === sParam) {
+	    return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+};
+
+
+function notone(name) {
+    return  !(name == CNN || name == FOX || name == WAPO || name == WSJ || name == NYT || name == null);
+}
+
+
+var urldate = getUrlParameter('date');
+var udate = urldate;
+if (urldate == "") {
+    udate = new Date();
+}
+var urlleft =  getUrlParameter('left');
+var urlright =  getUrlParameter('right');
+console.log('date = ' + urldate + 'left = ' + urlleft + 'right = ' + urlright);
+console.log('date = ' + urldate + 'left = ' + urlleft + 'right = ' + urlright);
+if (notone(urlleft)) {
+    alert("Left name of news-site not valid. Please use one of cnn/foxnews/wapo/wsj/nytimes.");
+}
+if (notone(urlright)) {
+    alert("Right name of news-site not valid. Please use one of cnn/foxnews/wapo/wsj/nytimes.");
+}
 
 var s3 = new AWS.S3();
 
 window.onload=function(){
     // to fix the sizing.
     window.onorientationchange = function() {
+	$('.your-class').slick('slickGoTo', 0);
 	do_loads();
     };
  
@@ -75,79 +100,58 @@ window.onload=function(){
     var canvas1=document.getElementById(CNN + '-canvas');
     var d1 = document.getElementById('div-' + CNN);
     var a1 = document.getElementById('div-' + CNN + '-annote');
-    d1.style.display = "none";
-    var canvas1right=document.getElementById(CNN + '-canvas-right');
-    var d1right = document.getElementById('div-' + CNN + '-right');
-    d1right.style.display = "none";
-    var a1right = document.getElementById('div-' + CNN + '-annote-right');
+//    d1.style.display = "none";
     // NYT
     var canvas2=document.getElementById(NYT + '-canvas');
     var d2 = document.getElementById('div-' + NYT);
-    d2.style.display = "none";
+  //  d2.style.display = "none";
     var a2 = document.getElementById('div-' + NYT + '-annote');
-    var canvas2right=document.getElementById(NYT + '-canvas-right');
-    var d2right = document.getElementById('div-' + NYT + '-right');
-    d2right.style.display = "none";
-    var a2right = document.getElementById('div-' + NYT + '-annote-right');
-// FOX    
+    // FOX    
     var canvas3=document.getElementById(FOX + '-canvas');
     var d3 = document.getElementById('div-' + FOX);
-    d3.style.display = "none";
+    //d3.style.display = "none";
     var a3 = document.getElementById('div-' + FOX + '-annote');
-    var canvas3right = document.getElementById(FOX + '-canvas-right');
-    var d3right = document.getElementById('div-'  + FOX + '-right');
-    var a3right = document.getElementById('div-' + FOX + '-annote-right');
-    d3right.style.display = "none";
     // WSJ
     var canvas4=document.getElementById(WSJ + '-canvas');
     var d4 = document.getElementById('div-' + WSJ);
-    d4.style.display = "none";
+   // d4.style.display = "none";
     var a4 = document.getElementById('div-' + WSJ + '-annote');
-    var canvas4right=document.getElementById(WSJ + '-canvas-right');
-    var d4right = document.getElementById('div-' + WSJ + '-right');
-    d4right.style.display = "none";
-    var a4right = document.getElementById('div-' + WSJ + '-annote-right');
     // WAPO
     var canvas5=document.getElementById(WAPO + '-canvas');
     var d5 = document.getElementById('div-' + WAPO);
-    d5.style.display = "none";
+    //d5.style.display = "none";
     var a5 = document.getElementById('div-' + WAPO + '-annote');
-    var canvas5right=document.getElementById(WAPO + '-canvas-right');
-    var d5right = document.getElementById('div-' + WAPO + '-right');
-    d5right.style.display = "none";
-    var a5right = document.getElementById('div-wapo-annote-right');
 
-    // All the swaps on the radio clicks
-    document.getElementById("cnn").onclick=function(){
-	cnnl = swap_l(CNN, cnn, cnnl, cnnr);
-    };
-    document.getElementById("nytimes").onclick=function(){
-	nytl = swap_l(NYT, nyt, nytl, nytr);
-    };
-    document.getElementById("fox").onclick=function(){
-	foxl = swap_l(FOX, fox, foxl, foxr);
-    };
-    document.getElementById("wsj").onclick=function(){
-	wsjl = swap_l(WSJ, wsj, wsjl, wsjr);
-    };
-    document.getElementById("wapo").onclick=function(){
-	wapol = swap_l(WAPO, wapo, wapol, wapor);
-    };
-    document.getElementById("cnn-right").onclick=function(){
-	cnnr = swap_r(CNN, cnn, cnnl, cnnr);
-    };
-    document.getElementById("nytimes-right").onclick=function(){
-	nytr = swap_r(NYT, nyt, nytl, nytr);
-    };
-    document.getElementById("fox-right").onclick=function(){
-	foxr = swap_r(FOX, fox, foxl, foxr);
-    };
-    document.getElementById("wsj-right").onclick=function(){
-	wsjr = swap_r(WSJ, wsj, wsjl, wsjr);
-    };
-    document.getElementById("wapo-right").onclick=function(){
-	wapor = swap_r(WAPO, wapo, wapol, wapor);
-    };
+
+    function url_date(date) {
+	var stateObj = { index: "index" };
+	var pathname = window.location.href; // Returns path only
+	var np = pathname.replace(/(&date=.+?)(&|$)/, '&date=' + date+ "$2");
+	if (!np.match(/.*&date.*/)) {
+	    np = np + "?&date=" + date;
+	}
+	history.pushState(stateObj, "remembering date", np);
+    }
+    
+    function url_left(name) {
+	var stateObj = { index: "index" };
+	var pathname = window.location.href; // Returns full url
+	var np = pathname.replace(/(&left=.+?)(&|$)/, '&left=' + name + "$2");
+	if (!np.match(/.*&left.*/)) {
+	    np = np + "&left=" + name;
+	}
+	history.pushState(stateObj, "remembering date", np);
+    }
+
+    function url_right(name) {
+	var stateObj = { index: "index" };
+	var pathname = window.location.href; // Returns full url
+	var np = pathname.replace(/(&right=.+?)(&|$)/, '&right=' + name + "$2" );
+	if (!np.match(/.+&right.+/)) {
+	    np = np + "&right=" + name;
+	}
+	history.pushState(stateObj, "remembering date", np);
+    }
 
     // JM TODO: make sure that render-right does the right thing,
     // load-pdf without loading the precise PDF if there are non-null
@@ -176,32 +180,8 @@ window.onload=function(){
 	}
     }
 
-     function render_rightright() {
-	hide_allright();
-	var radioValue = $("input[name='group1right']:checked").val();
-	if (radioValue == "cnn") {
-	    console.log("cnn right");
-	    cnnr = swap_r(CNN, cnn, cnnl, cnnr);
-	} else if (radioValue == "nytimes") {
-	    console.log("nytimes right");
-	    nytr = swap_r(NYT, nyt, nytl, nytr);
-	} else if (radioValue == "fox") {
-	    console.log("fox right");
-	    foxr = swap_r(FOX, fox, foxl, foxr);
-	} else if (radioValue == "wsj") {
-	    console.log("wsj right");
-	    wsjr = swap_r(WSJ, wsj, wsjl, wsjr);
-	} else if (radioValue == "wapo") { 
-	    console.log('here it is ' + radioValue);
-//	    console.log("wapo right");
-	    wapor = swap_r(WAPO, wapo, wapol, wapor);
-	} else {
-	    alert('this shouldn\'t happen');
-	}
-    }
-
     function hide_all() {
-	d1.style.display = "none";
+/*	d1.style.display = "none";
 	canvas1.style.visibility  = 'hidden';
 //	a1.style.visibility = 'hidden';
 	d2.style.display = "none";
@@ -216,25 +196,8 @@ window.onload=function(){
 	d5.style.display = "none";
 	canvas5.style.visibility  = 'hidden';
 //	a5.style.visibility = 'hidden';
-    }
+  */  }
     
-    function hide_allright() {
-	d1right.style.display = "none";
-	canvas1right.style.visibility  = 'hidden';
-//	a1right.style.visibility = 'hidden';
-	d2right.style.display = "none";
-	canvas2right.style.visibility  = 'hidden';
-//	a2right.style.visibility = 'hidden';
-	d3right.style.display = "none";
-	canvas3right.style.visibility  = 'hidden';
-//	a3right.style.visibility = 'hidden';
-	d4right.style.display = "none";
-	canvas4right.style.visibility  = 'hidden';
-//	a4right.style.visibility = 'hidden';
-	d5right.style.display = "none";
-	canvas5right.style.visibility  = 'hidden';
-//	a5right.style.visibility = 'hidden';
-    }
     
     function all_false() {
 	cnnl = nytl = foxl = wapol = wsjl = false;
@@ -254,22 +217,6 @@ window.onload=function(){
 	a4.innerHTML = "";
 	a5.innerHTML = "";
 	hide_all();
-
-    }
-
-    function all_falseright() {
-	cnnr = nytr = foxr = wapor = wsjr = false;
-	canvas1right.getContext('2d').clearRect(0, 0, canvas1right.width, canvas1right.height);
-	canvas2right.getContext('2d').clearRect(0, 0, canvas2right.width, canvas2right.height);
-	canvas3right.getContext('2d').clearRect(0, 0, canvas3right.width, canvas3right.height);
-	canvas4right.getContext('2d').clearRect(0, 0, canvas4right.width, canvas4right.height);
-	canvas5right.getContext('2d').clearRect(0, 0, canvas5right.width, canvas5right.height);
-	a1right.innerHTML = "";
-	a2right.innerHTML = "";
-	a3right.innerHTML = "";
-	a4right.innerHTML = "";
-	a5right.innerHTML = "";
-	hide_allright();
     }
 
     
@@ -291,15 +238,9 @@ window.onload=function(){
 	// Maybe remember the annotations. hmm.
     }
 
-    function write_loading(div) {	
-	var text = "Loading PDF, please wait...";
-	var dp = document.getElementById(div);
-	dp.style.fontSize = '12px';
-	dp.style.fontFamily = 'Poppins';
-	dp.innerHTML = '<br> ' + text;
-    }
     
     function swap_l(name, url, bl, br) {
+	url_left(name);
 	hide_all();
 	var can1 = name + '-canvas';
 	var div1 = 'div-' + name;
@@ -331,35 +272,6 @@ window.onload=function(){
 	}
     };
 
-    function swap_r(name, url, bl, br) {
-	var can1 = name + '-canvas-right';
-	var div1 = 'div-' + name + '-right';
-	var can2 = name + '-canvas';
-	var div2 = 'div-' + name;
-	var str = url;
-	var a = 'div-' + name + '-annote-right';
-	var a2 = 'div-' + name + '-annote';
-	hide_allright();
-	var gc =  document.getElementById(can1);
-	var gd = document.getElementById(div1);
-	gc.style.visibility = 'visible';
-	gd.style.display = 'block';
-//	document.getElementById(a).style.visibility = 'visible';
-	if (!bl && !br) {
-	    console.log('loading right pdf ');
-	    write_loading('loading-right');
-	    loadPdf(cdate + str, can1, div1, can2, div2, a, a2);
-	    return true;
-	} else if (bl) {
-	    reload(can1, can2, a, a2, document.getElementById(div2).width, document.getElementById(div2).height);
-	    return false;
-	} else {
-	    console.log('already loaded right ' + str);
-	    return true;
-	}
-    }
-
- 
 
 function date_obj_now() {
     return moment().tz('America/New_York');
@@ -382,26 +294,22 @@ function today(td){
       
 function do_loads() {
     all_false();
-    all_falseright();
     release_pdfs();
-    render_rightright();
     render_right();
 }
 
-function check_get_dates(dcurr) {
-    if (!today(dcurr)) {
-//	alert('call check get dates only with today!' + dcurr.format("YYY-MM-DD:HH"));
-    }
-    if (dcurr.hours() == 0) {
-	//  yesterday
-	cdate = 'news_clips/' + date_yesterday() + '.23/'; 
-	// load pdfs
-	do_loads();
-    }
-    var h = dcurr.format('HH');
-    console.log('checking hour ' + h + ' from date ' + dcurr.format("YYYY-MM-DD"));
-    var dtj =  dcurr.format("YYYY-MM-DD") + '.' + h + '/';
-    var all_but = 'news-clips/' + dtj ;
+    function check_get_dates(dcurr) {
+	if (!today(dcurr)) {
+	    var c =  date_yesterday() + '.23/'; 
+	    cdate = 'news-clips/' + c;
+	    url_date(c);
+	    // load pdfs
+	    do_loads();
+	}
+	var h = dcurr.format('HH');
+	console.log('checking hour ' + h + ' from date ' + dcurr.format("YYYY-MM-DD"));
+	var dtj =  dcurr.format("YYYY-MM-DD") + '.' + h + '/';
+	var all_but = 'news-clips/' + dtj ;
     var url = all_but +  cnn;
     var params = {Bucket: 'all2sides.com', Key: url};
     s3.headObject(params, function(err, data) {
@@ -410,6 +318,7 @@ function check_get_dates(dcurr) {
 	    check_get_dates(dcurr);
 	} else {
 	    cdate = all_but;
+	    url_date(dtj);
 	    // load pdfs
 	    do_loads();
 	}
@@ -420,6 +329,7 @@ function dt_now() {
     var lT = moment().tz('America/New_York');
     return(lT.format("YYYY-MM-DD.HH"));
 }
+
     
     function if_today(att, val) {
 	if (today(att)) {
@@ -428,11 +338,19 @@ function dt_now() {
 	} else  {
 	    dtn = val + ".23";
 	    cdate = hprefix + dtn + "/";
+	    url_date(dtn + '/');
 	    do_loads();
 	}
     }
-    
-    // datepicker
+
+    function set_date(val) {
+	if (val == null || !val.match(/....-..-..\...\//)) {
+	    alert('Poorly formatted date in url. Must have \'YYYY-MM-DD.HH/\'');
+	}  else {
+	    cdate = hprefix + val;
+	    do_loads();
+	}
+    }    
     var checkin = $('.dpd1').datepicker()
 	.on('click', function (ev) {
             $('.datepicker').css("z-index", "999999999");
@@ -446,15 +364,22 @@ function dt_now() {
 	onSelect: function(dateText) {
 	    var attempt = $(this).datepicker('getDate');
 	    var mom = moment(attempt);
+	    $('.your-class').slick('slickGoTo', 0);
 	    if_today(mom, this.value);
 	}
     }).on("change", function() {
 	var attempt = $(this).datepicker('getDate');
 	var mom = moment(attempt);
+	$('.your-class').slick('slickGoTo', 0);
 	if_today(mom, this.value);
-    }).datepicker("setDate", new Date());
-	var m = date_obj_now();
-	check_get_dates(m);
+    }).datepicker("setDate", new Date(udate));
+	var m = moment(urldate, "YYYY-MM-DD.HH/");
+	if (!m.isValid()) {
+	    m = date_obj_now();
+	    if_today(m);
+	}  else {
+	    set_date(urldate);
+	}
     });
 
     $(document).ready(function () {
@@ -462,7 +387,6 @@ function dt_now() {
 	    e.target.target = '_blank';
 	});
 
-	$("#mydate").datepicker().datepicker( "setDate", new Date());
     });
 
 }
