@@ -431,54 +431,7 @@ function dt_now() {
 	    do_loads();
 	}
     }
-
     
-    // old
-/*    
-    jQuery(function($) {
-	$(".date").datepicker({
-            maxDate : 0,
-	    dateFormat: "yy-mm-dd",
-	    onSelect: function(dateText) {
-		var attempt = $(this).datepicker('getDate');
-		var dtn = dt_now();
-		if (!today(attempt)) {
-		    dtn = this.value + ".23";
-		}
-		var coeff = hprefix + dtn + "/";
-		all_false();
-		all_falseright();
-		release_pdfs();
-		cdate = coeff;
-		render_rightright();
-		render_right();
-	    }
-	}).on("change", function() {
-	var attempt = $(this).datepicker('getDate');
-	var dtn = dt_now();
-	if (!today(attempt)) {
-	    dtn = this.value + ".23";
-	}
-	var coeff = hprefix + dtn + "/";
-	all_false();
-	all_falseright();
-	cdate = coeff;
-	release_pdfs();
-	render_rightright();
-	render_right();
-
-    }).datepicker("setDate", new Date());
-    var prefix = "news-clips/";
-    var hprefix = prefix;
-    var dtn = dt_now();
-    var coeff = hprefix + dtn + "/";
-    all_false();
-    all_falseright();
-    cdate = coeff;
-    release_pdfs();
-    render_rightright();
-    render_right();     
-    }); */
     // datepicker
     var checkin = $('.dpd1').datepicker()
 	.on('click', function (ev) {
