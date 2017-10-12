@@ -1,55 +1,41 @@
-s3_id: AKIAI5H2DDGYIR6LAKBA
-s3_secret: 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
-s3_bucket: all2sides.com
-cloudfront_distribution_id: E22YX33VARN2UR
-cloudfront_distribution_config:
-  default_cache_behavior:
-    min_ttl: <%= 60 * 60 * 1 %>
-  aliases:
-    quantity: 1
-    items:
-      - your.domain.net
-max_age: 12000
-gzip: true
+# You can remove the first two lines to have credentials read from
+# the environment variables AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY or
+# ~/.aws/credentials.
+s3_id: YOUR_AWS_S3_ACCESS_KEY_ID
+s3_secret: YOUR_AWS_S3_SECRET_ACCESS_KEY
+s3_bucket: your.blog.bucket.com
 
-
-exclude_from_upload: news-clips
-
-
-# set s3_token if using temporary credentials with a session token (eg: when assuming a role)
-# s3_token: YOUR_AWS_S3_SESSION_TOKEN
+# set session_token if using temporary credentials with a session token (eg: when assuming a role)
+# session_token: YOUR_AWS_S3_SESSION_TOKEN
 
 # Below are examples of all the available configurations.
 # See README for more detailed info on each of them.
 
-site: "/Users/jamiemorgenstern/Dropbox\ (life)/s3web/"
+# site: path-to-your-website
 
 # index_document: index.html
 # error_document: error.html
 
-max_age:
-   "news-clips/*": 600000
-   "*": 30000
+# max_age:
+#   "assets/*": 6000
+#   "*": 300
 
-gzip:
-   - .html
-   - .css
-   - .md
-   - .pdf
-   - .png
-   - .js
+# gzip:
+#   - .html
+#   - .css
+#   - .md
 # gzip_zopfli: true
 
 # See http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region for valid endpoints
 # s3_endpoint: ap-northeast-1
 
-ignore_on_server: news-clips/
+# ignore_on_server: that_folder_of_stuff_i_dont_keep_locally
 
 # exclude_from_upload:
 #   - those_folders_of_stuff
 #   - i_wouldnt_want_to_upload
 
-s3_reduced_redundancy: true
+# s3_reduced_redundancy: true
 
 # cloudfront_distribution_id: your-dist-id
 
