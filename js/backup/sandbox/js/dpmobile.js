@@ -1,3 +1,13 @@
+var isMobile = false; //initiate as false
+// device detection
+    if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|ipad|iris|kindle|Android|Silk|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(navigator.userAgent) 
+    	|| /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(navigator.userAgent.substr(0,4))) isMobile = true;
+
+if (isMobile == false) {
+    if (confirm("Would you like to see our desktop version?")) {
+	window.location.href = "http://all2sides.com/backup/index.html";
+    } 
+}
 
 // "macros"
 var CNN = "cnn";
@@ -12,13 +22,6 @@ var cnn_png = 'www.cnn.com-phantomjs.compressed.png';
 var fox = 'www.foxnews.com-wkh.compressed.pdf';
 var wsj = 'www.wsj.com-wkh.compressed.pdf';
 var wapo = 'www.washingtonpost.com-wkh.compressed.pdf';
-// URLS for puppet versions
-var nytpup = 'www.nytimes.com-puppet.compressed.pdf';
-var cnnpup = 'www.cnn.com-puppet.compressed.pdf';
-var cnnpup = 'www.cnn.com-puppet.compressed.pdf';
-var foxpup = 'www.foxnews.com-puppet.compressed.pdf';
-var wsjpup = 'www.wsj.com-puppet.compressed.pdf';
-var wapopup = 'www.washingtonpost.com-puppet.compressed.pdf';
 // the pointers to the pages that should be destroyed when a date is
 // changed
 var nytp = null;
@@ -28,41 +31,6 @@ var wsjp = null;
 var wapop = null;
 var prefix, hprefix = "news-clips/";
 var cdate = "";
-
-
-var getUrlParameter = function getUrlParameter(sParam) {
-    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-        sURLVariables = sPageURL.split('&'),
-        sParameterName,
-        i;
-    for (i = 0; i < sURLVariables.length; i++) {
-        sParameterName = sURLVariables[i].split('=');
-        if (sParameterName[0] === sParam) {
-	    return sParameterName[1] === undefined ? true : sParameterName[1];
-        }
-    }
-};
-
-function notone(name) {
-    return  !(name == CNN || name == FOX || name == WAPO || name == WSJ || name == NYT);
-}
-
-var urldate = getUrlParameter('date');
-var udate = urldate;
-if (urldate == "") {
-    udate = new Date();
-}
-var urlleft =  getUrlParameter('left');
-var urlright =  getUrlParameter('right');
-console.log('date = ' + urldate + 'left = ' + urlleft + 'right = ' + urlright);
-if (notone(urlleft)) {
-//    alert(urlleft);
-    alert("Left name of news-site not valid. Please use one of cnn/foxnews/wapo/wsj/nytimes.");
-}
-if (notone(urlright)) {
-  //  alert(urlright);
-    alert("Right name of news-site not valid. Please use one of cnn/foxnews/wapo/wsj/nytimes.");
-}
 
 
 var s3 = new AWS.S3();
@@ -149,66 +117,36 @@ window.onload=function(){
     d5right.style.display = "none";
     var a5right = document.getElementById('div-wapo-annote-right');
 
-    function url_date(date) {
-	var stateObj = { index: "index" };
-	var pathname = window.location.href; // Returns path only
-	var np = pathname.replace(/(&date=.+?)(&|$)/, '&date=' + date+ "$2");
-	if (!np.match(/.*&date.*/)) {
-	    np = np + "?&date=" + date;
-	}
-	history.pushState(stateObj, "remembering date", np);
-    }
-    
-    function url_left(name) {
-	var stateObj = { index: "index" };
-	var pathname = window.location.href; // Returns full url
-	var np = pathname.replace(/(&left=.+?)(&|$)/, '&left=' + name + "$2");
-	if (!np.match(/.*&left.*/)) {
-	    np = np + "&left=" + name;
-	}
-	history.pushState(stateObj, "remembering date", np);
-    }
-
-    function url_right(name) {
-	var stateObj = { index: "index" };
-	var pathname = window.location.href; // Returns full url
-	var np = pathname.replace(/(&right=.+?)(&|$)/, '&right=' + name + "$2" );
-	if (!np.match(/.+&right.+/)) {
-	    np = np + "&right=" + name;
-	}
-	history.pushState(stateObj, "remembering date", np);
-    }
-    
     // All the swaps on the radio clicks
     document.getElementById("cnn").onclick=function(){
-	cnnl = swap_l(CNN, cnn, cnnpup, cnnl, cnnr);
+	cnnl = swap_l(CNN, cnn, cnnl, cnnr);
     };
     document.getElementById("nytimes").onclick=function(){
-	nytl = swap_l(NYT, nyt, nytpup, nytl, nytr);
+	nytl = swap_l(NYT, nyt, nytl, nytr);
     };
     document.getElementById("fox").onclick=function(){
-	foxl = swap_l(FOX, fox, foxpup, foxl, foxr);
+	foxl = swap_l(FOX, fox, foxl, foxr);
     };
     document.getElementById("wsj").onclick=function(){
-	wsjl = swap_l(WSJ, wsj, wsjpup, wsjl, wsjr);
+	wsjl = swap_l(WSJ, wsj, wsjl, wsjr);
     };
     document.getElementById("wapo").onclick=function(){
-	wapol = swap_l(WAPO, wapo, wapopup, wapol, wapor);
+	wapol = swap_l(WAPO, wapo, wapol, wapor);
     };
     document.getElementById("cnn-right").onclick=function(){
-	cnnr = swap_r(CNN, cnn, cnnpup, cnnl, cnnr);
+	cnnr = swap_r(CNN, cnn, cnnl, cnnr);
     };
     document.getElementById("nytimes-right").onclick=function(){
-	nytr = swap_r(NYT, nyt, nytpup, nytl, nytr);
+	nytr = swap_r(NYT, nyt, nytl, nytr);
     };
     document.getElementById("fox-right").onclick=function(){
-	foxr = swap_r(FOX, fox, foxpup, foxl, foxr);
+	foxr = swap_r(FOX, fox, foxl, foxr);
     };
     document.getElementById("wsj-right").onclick=function(){
-	wsjr = swap_r(WSJ, wsj, wsjpup, wsjl, wsjr);
+	wsjr = swap_r(WSJ, wsj, wsjl, wsjr);
     };
     document.getElementById("wapo-right").onclick=function(){
-	wapor = swap_r(WAPO, wapo, wapopup, wapol, wapor);
+	wapor = swap_r(WAPO, wapo, wapol, wapor);
     };
 
     // JM TODO: make sure that render-right does the right thing,
@@ -219,20 +157,20 @@ window.onload=function(){
 	var radioValue = $("input[name='group1']:checked").val();
 	if (radioValue == CNN) {
 	    console.log(CNN);
-	    cnnl = swap_l(CNN, cnn, cnnpup, cnnl, cnnr);
+	    cnnl = swap_l(CNN, cnn, cnnl, cnnr);
 	} else if (radioValue == NYT) {
 	    console.log("nytimes");
-	    nytl = swap_l(NYT, nyt, nytpup, nytl, nytr);
+	    nytl = swap_l(NYT, nyt, nytl, nytr);
 	} else if (radioValue == FOX) {
 	    console.log("fox");
-	    foxl = swap_l(FOX, fox, foxpup, foxl, foxr);
+	    foxl = swap_l(FOX, fox, foxl, foxr);
 	} else if (radioValue == WSJ) {
 	    console.log("wsj");
-	    wsjl = swap_l(WSJ, wsj, wapopup, wsjl, wsjr);
+	    wsjl = swap_l(WSJ, wsj, wsjl, wsjr);
 	} else if (radioValue == WAPO) { // radioValue == wapo
 	    console.log(radioValue);
 	    console.log("wapo");
-	    wapol = swap_l(WAPO, wapo, wapopup, wapol, wapor);
+	    wapol = swap_l(WAPO, wapo, wapol, wapor);
 	} else {
 	    alert('wtf');
 	}
@@ -243,20 +181,20 @@ window.onload=function(){
 	var radioValue = $("input[name='group1right']:checked").val();
 	if (radioValue == "cnn") {
 	    console.log("cnn right");
-	    cnnr = swap_r(CNN, cnn, cnnpup, cnnl, cnnr);
+	    cnnr = swap_r(CNN, cnn, cnnl, cnnr);
 	} else if (radioValue == "nytimes") {
 	    console.log("nytimes right");
-	    nytr = swap_r(NYT, nyt, nytpup, nytl, nytr);
+	    nytr = swap_r(NYT, nyt, nytl, nytr);
 	} else if (radioValue == "fox") {
 	    console.log("fox right");
-	    foxr = swap_r(FOX, fox, foxpup, foxl, foxr);
+	    foxr = swap_r(FOX, fox, foxl, foxr);
 	} else if (radioValue == "wsj") {
 	    console.log("wsj right");
-	    wsjr = swap_r(WSJ, wsj, wsjpup, wsjl, wsjr);
+	    wsjr = swap_r(WSJ, wsj, wsjl, wsjr);
 	} else if (radioValue == "wapo") { 
 	    console.log('here it is ' + radioValue);
 //	    console.log("wapo right");
-	    wapor = swap_r(WAPO, wapo, wapopup, wapol, wapor);
+	    wapor = swap_r(WAPO, wapo, wapol, wapor);
 	} else {
 	    alert('this shouldn\'t happen');
 	}
@@ -360,9 +298,8 @@ window.onload=function(){
 	dp.style.fontFamily = 'Poppins';
 	dp.innerHTML = '<br> ' + text;
     }
-
-    function swap_l(name, url, purl, bl, br) {
-	url_left(name);
+    
+    function swap_l(name, url, bl, br) {
 	hide_all();
 	var can1 = name + '-canvas';
 	var div1 = 'div-' + name;
@@ -378,7 +315,7 @@ window.onload=function(){
 	if (!bl && !br) {
 	    console.log('loading left pdf ' + url);
 	    write_loading('loading');
-	    puppet_exists(cdate, url, purl, can1, div1, can2, div2, a1, a2);
+	    loadPdf(cdate + url, can1, div1, can2, div2, a1, a2);
 	    return true;
 	} else if (br) {
 	    console.log(' trying to reload left');
@@ -394,12 +331,12 @@ window.onload=function(){
 	}
     };
 
-    function swap_r(name, url, purl, bl, br) {
-	url_right(name);
+    function swap_r(name, url, bl, br) {
 	var can1 = name + '-canvas-right';
 	var div1 = 'div-' + name + '-right';
 	var can2 = name + '-canvas';
 	var div2 = 'div-' + name;
+	var str = url;
 	var a = 'div-' + name + '-annote-right';
 	var a2 = 'div-' + name + '-annote';
 	hide_allright();
@@ -411,26 +348,23 @@ window.onload=function(){
 	if (!bl && !br) {
 	    console.log('loading right pdf ');
 	    write_loading('loading-right');
-	    puppet_exists(cdate,  url, purl, can1, div1, can2, div2, a, a2);
+	    loadPdf(cdate + str, can1, div1, can2, div2, a, a2);
 	    return true;
 	} else if (bl) {
 	    reload(can1, can2, a, a2, document.getElementById(div2).width, document.getElementById(div2).height);
 	    return false;
 	} else {
-	    console.log('already loaded right ' + url);
+	    console.log('already loaded right ' + str);
 	    return true;
 	}
     }
 
  
 
-    function date_obj_now() {
-	return moment().tz('America/New_York');
-    }
+function date_obj_now() {
+    return moment().tz('America/New_York');
+}
 
-    function date_obj_url(yyyymmddhh) {
-    }
-    
 function date_now() {
     var lT = moment().tz('America/New_York');
     return(lT.format("YYYY-MM-DD"));
@@ -454,12 +388,13 @@ function do_loads() {
     render_right();
 }
 
-    
 function check_get_dates(dcurr) {
     if (!today(dcurr)) {
-	var c = date_yesterday() + '.23/'; 
-	cdate = 'news-clips/' + c;
-	url_date(c);
+//	alert('call check get dates only with today!' + dcurr.format("YYY-MM-DD:HH"));
+    }
+    if (dcurr.hours() == 0) {
+	//  yesterday
+	cdate = 'news_clips/' + date_yesterday() + '.23/'; 
 	// load pdfs
 	do_loads();
     }
@@ -476,38 +411,11 @@ function check_get_dates(dcurr) {
 	} else {
 	    cdate = all_but;
 	    // load pdfs
-	    url_date(dtj);
 	    do_loads();
 	}
     });
 }
 
-
-    function puppet_exists(cdate,  url, purl, can1, div1, can2, div2, a, a2) {
-//	alert(dcurr);
-/*	var h = dcurr.format('HH');
-	console.log('checking url '  + url + 'hour ' + h + ' from date ' + dcurr.format("YYYY-MM-DD"));
-	var dtj =  dcurr.format("YYYY-MM-DD") + '.' + h + '/';*/
-	var all_but =  cdate ;
-	var check = all_but +  purl;
-	var params = {Bucket: 'all2sides.com', Key: check};
-	s3.headObject(params, function(err, data) {
-	    if (err) {
-		console.log("Error." + check + ' not found' );
-		console.log('not puppet\n');
-		loadPdf(cdate + url, can1, div1, can2, div2, a1, a2);
-		return true;
-		// don't use puppet, use standard
-	    } else {
-		// use puppet
-		console.log("Puppet!." + check + ' found');
-		loadPdf(cdate + purl, can1, div1, can2, div2, a1, a2);
-		return true;
-	    }
-	});
-    }
-
-    
 function dt_now() {
     var lT = moment().tz('America/New_York');
     return(lT.format("YYYY-MM-DD.HH"));
@@ -520,21 +428,57 @@ function dt_now() {
 	} else  {
 	    dtn = val + ".23";
 	    cdate = hprefix + dtn + "/";
-	    url_date(dtn + '/');
-	    do_loads();
-	}
-    }
-
-    function set_date(val) {
-	if (val == null || !val.match(/....-..-..\...\//)) {
-	    alert('Poorly formatted date in url. Must have \'YYYY-MM-DD.HH/\'');
-	}  else {
-	    cdate = hprefix + val;
 	    do_loads();
 	}
     }
 
     
+    // old
+/*    
+    jQuery(function($) {
+	$(".date").datepicker({
+            maxDate : 0,
+	    dateFormat: "yy-mm-dd",
+	    onSelect: function(dateText) {
+		var attempt = $(this).datepicker('getDate');
+		var dtn = dt_now();
+		if (!today(attempt)) {
+		    dtn = this.value + ".23";
+		}
+		var coeff = hprefix + dtn + "/";
+		all_false();
+		all_falseright();
+		release_pdfs();
+		cdate = coeff;
+		render_rightright();
+		render_right();
+	    }
+	}).on("change", function() {
+	var attempt = $(this).datepicker('getDate');
+	var dtn = dt_now();
+	if (!today(attempt)) {
+	    dtn = this.value + ".23";
+	}
+	var coeff = hprefix + dtn + "/";
+	all_false();
+	all_falseright();
+	cdate = coeff;
+	release_pdfs();
+	render_rightright();
+	render_right();
+
+    }).datepicker("setDate", new Date());
+    var prefix = "news-clips/";
+    var hprefix = prefix;
+    var dtn = dt_now();
+    var coeff = hprefix + dtn + "/";
+    all_false();
+    all_falseright();
+    cdate = coeff;
+    release_pdfs();
+    render_rightright();
+    render_right();     
+    }); */
     // datepicker
     var checkin = $('.dpd1').datepicker()
 	.on('click', function (ev) {
@@ -555,14 +499,9 @@ function dt_now() {
 	var attempt = $(this).datepicker('getDate');
 	var mom = moment(attempt);
 	if_today(mom, this.value);
-    }).datepicker("setDate", new Date(udate));
-	var m = moment(urldate, "YYYY-MM-DD.HH/");
-	if (!m.isValid()) {
-	    m = date_obj_now();
-	    if_today(m);
-	}  else {
-	    set_date(urldate);
-	}
+    }).datepicker("setDate", new Date());
+	var m = date_obj_now();
+	check_get_dates(m);
     });
 
     $(document).ready(function () {
@@ -570,7 +509,7 @@ function dt_now() {
 	    e.target.target = '_blank';
 	});
 
-//	$("#mydate").datepicker().datepicker( "setDate", new Date());
+	$("#mydate").datepicker().datepicker( "setDate", new Date());
     });
 
 }

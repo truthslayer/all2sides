@@ -23,15 +23,15 @@ function get_name(url) {
 
 function get_scale(name) {
      if (name == CNN) {
-	return 0.8;
+	return 1.0;
     } else if (name == FOX) {
-	return 0.8;
+	return 2.0;
     } else if (name == NYT) {
-	return 0.8;
+	return 1.2;
     } else if (name == WSJ) {
-	return 0.8;
+	return 1.0;
     } else if (name == WAPO) {
-	return 0.8;
+	return 1.5;
     } else {
 	alert('wtf');
 	return 1.0;
@@ -110,7 +110,7 @@ function remove_loading(cname) {
 
 
 function cnn_special(url, cvname, dname, cv2, d2, a, a2) {
- // Check if the png exits.
+    // Check if the png exits.
    console.log('checking dates for cnn png ' + url);
     if (get_name(url) != CNN) {
 	alert('only call with cnn!');
@@ -228,7 +228,7 @@ function given_pdf_cnn(pdf, url, cvname, dname, cv2, d2, a, a2) {
 
 function loadPdf(url, cvname, dname, cv2, d2, a, a2) {
     set_date_space(dname, url);    
-    console.log('load pdf ' + url + ' ' + cvname + ' ' + dname + ' ' + d2 + ' ' + a + ' ' + a2);
+//    console.log('load pdf ' + url + ' ' + cvname + ' ' + dname + ' ' + d2 + ' ' + a + ' ' + a2);
     var name = get_name(url);
     if (name == CNN) {
 	cnn_special(url, cvname, dname, cv2, d2, a, a2);
