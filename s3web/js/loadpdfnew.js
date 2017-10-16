@@ -1,4 +1,4 @@
-var scalez = .8;
+var scalez = .4;
 if (isMobile) {
     scalez = .7;
 };
