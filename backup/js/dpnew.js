@@ -205,7 +205,7 @@ window.onload=function(){
 	foxr = swap_r(FOX, fox, foxpup, foxl, foxr);
     };
     document.getElementById("wsj-right").onclick=function(){
-	wsjr = swap_r(WSJ, wsj, foxpup, wsjl, wsjr);
+	wsjr = swap_r(WSJ, wsj, wsjpup, wsjl, wsjr);
     };
     document.getElementById("wapo-right").onclick=function(){
 	wapor = swap_r(WAPO, wapo, wapopup, wapol, wapor);
