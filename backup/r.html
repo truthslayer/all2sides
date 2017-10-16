@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.7.18.min.js"></script>
+    <title>This is title</title></head>
+<body>
+Hello world
+
+
+
+<script type="text/javascript">
+  AWS.config.update({
+  accessKeyId: "AKIAJ5QHG7BBXGRUXQZA",
+  secretAccessKey: "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"
+  });
+
+  var s3 = new AWS.S3();
+  var params = {Bucket: 'all2sides.com', Key: 'news-clips/2017-05-21.23/www.cnn.com-phantomjs.compressed.pdf'};
+  s3.headObject(params).on('success', function(response) {
+  console.log("Key was", response.request.params.Key);
+  }).on('error',function(error){
+  //error return a object with status code 404
+  console.log('error!');
+  }).send();
+</script>
+
+</body>
+</html>
