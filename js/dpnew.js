@@ -1,4 +1,3 @@
-
 // "macros"
 var CNN = "cnn";
 var FOX = "fox";
