@@ -1,6 +1,0 @@
-
-// get aws set up
-AWS.config.update({
-    accessKeyId: "AKIAJ5QHG7BBXGRUXQZA",
-    secretAccessKey: "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"
-});
