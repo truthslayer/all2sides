@@ -427,27 +427,23 @@ window.onload=function(){
  
 
     function puppet_exists(cdate,  url, purl, can1, div1, can2, div2, a, a2) {
-//	alert(dcurr);
-/*	var h = dcurr.format('HH');
+	alert(dcurr);
+	var h = dcurr.format('HH');
 	console.log('checking url '  + url + 'hour ' + h + ' from date ' + dcurr.format("YYYY-MM-DD"));
 	var dtj =  dcurr.format("YYYY-MM-DD") + '.' + h + '/';*/
 	var all_but =  cdate ;
 	var check = all_but +  purl;
-	var params = {Bucket: 'all2sides.com', Key: check};
-	s3.headObject(params, function(err, data) {
-	    if (err) {
-		console.log("Error." + check + ' not found' );
-		console.log('not puppet\n');
-		loadPdf(cdate + url, can1, div1, can2, div2, a, a2);
-		return true;
-		// don't use puppet, use standard
-	    } else {
-		// use puppet
-		console.log("Puppet!." + check + ' found');
-		loadPdf(cdate + purl, can1, div1, can2, div2, a, a2);
-		return true;
-	    }
-	});
+	if (check_if_exists(check)) {
+	    // use puppet
+	    console.log("Puppet!." + check + ' found');
+	    loadPdf(cdate + purl, can1, div1, can2, div2, a, a2);
+	    return true;
+	}  else {
+	    console.log("Error." + check + ' not found' );
+	    console.log('not puppet\n');
+	    loadPdf(cdate + url, can1, div1, can2, div2, a, a2);
+	    return true;
+	}
     }
 
     
@@ -501,6 +497,7 @@ function swap_to_puppet(url) {
 
     function check_get_dates(dcurr) {
 	if (!today(dcurr)) {
+	    console.log('not today');
 	    var c =  date_yesterday() + '.23/'; 
 	    cdate = 'news-clips/' + c;
 	    url_date(c);
@@ -512,14 +509,15 @@ function swap_to_puppet(url) {
 	var dtj =  dcurr.format("YYYY-MM-DD") + '.' + h + '/';
 	var all_but = 'news-clips/' + dtj ;
 	var url = all_but +  cnn;
-	var params = {Bucket: 'all2sides.com', Key: url};
 	console.log('checking ' + url + ' and ' swap_to_puppet(url));
 	if (check_if_exists(swap_to_puppet(url)) || check_if_exists(url)) {
+	    console.log('it existed!\n');
 	    cdate = all_but;
 	    url_date(dtj);
 	    // load pdfs
 	    do_loads();
 	} else {
+	    console.log('no dice.');
 	    dcurr.subtract(1, 'hours');
 	    check_get_dates(dcurr);
 	}
