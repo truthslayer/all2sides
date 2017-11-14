@@ -513,6 +513,7 @@ function swap_to_puppet(url) {
 	var all_but = 'news-clips/' + dtj ;
 	var url = all_but +  cnn;
 	var params = {Bucket: 'all2sides.com', Key: url};
+	console.log('checking ' + url + ' and ' swap_to_puppet(url));
 	if (check_if_exists(swap_to_puppet(url)) || check_if_exists(url)) {
 	    cdate = all_but;
 	    url_date(dtj);
