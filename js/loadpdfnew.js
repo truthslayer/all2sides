@@ -63,6 +63,11 @@ function get_date(url) {
     return ymdh[4] +  ':00 on ' + ymdh[2] + '/' + ymdh[3] + '/' + ymdh[1];
 }
 
+function swap_to_puppet(url) {
+    var url_new = url.replace(/wkh/i, 'puppet');
+    return  url_new.replace(/phantomjs/i, 'puppet');
+}
+
 function set_date_space(dname, url) {
     var dput;
     if (dname.match(/(.*)right(.*)/)) {
@@ -109,6 +114,20 @@ function remove_loading(cname) {
 }
 
 
+function check_if_exists(url) {
+    var params = {Bucket: 'all2sides.com', Key: url};
+    s3.headObject(params, function(err, data) {
+	if (err) {
+	    // load the pdf like a normal fucking person
+	    //	    alert('did not find png.');
+	    return false;
+	} else {
+	    return true;
+	}
+    })
+}
+		 
+    
 function cnn_special(url, cvname, dname, cv2, d2, a, a2) {
  // Check if the png exits.
    console.log('checking dates for cnn png ' + url);
@@ -129,6 +148,9 @@ function cnn_special(url, cvname, dname, cv2, d2, a, a2) {
 			  dname, cv2, d2, a, a2);
 	    } else {
 		// don't yet have a pdf
+		if (!check_if_exists(url)) {
+		    url = swap_to_puppet(url);
+		}
 		PDFJS.getDocument('http://all2sides.com/' + url).then(pdf => {
 		    pdfDocument = pdf;
 		    set_correct_page(url, pdf);
