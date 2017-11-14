@@ -427,10 +427,10 @@ window.onload=function(){
  
 
     function puppet_exists(cdate,  url, purl, can1, div1, can2, div2, a, a2) {
-	alert(dcurr);
-	var h = dcurr.format('HH');
-	console.log('checking url '  + url + 'hour ' + h + ' from date ' + dcurr.format("YYYY-MM-DD"));
-	var dtj =  dcurr.format("YYYY-MM-DD") + '.' + h + '/';*/
+	alert(cdate);
+	var h = cdate.format('HH');
+	console.log('checking url '  + url + 'hour ' + h + ' from date ' + cdate.format("YYYY-MM-DD"));
+	var dtj =  cdate.format("YYYY-MM-DD") + '.' + h + '/';
 	var all_but =  cdate ;
 	var check = all_but +  purl;
 	if (check_if_exists(check)) {
@@ -509,7 +509,7 @@ function swap_to_puppet(url) {
 	var dtj =  dcurr.format("YYYY-MM-DD") + '.' + h + '/';
 	var all_but = 'news-clips/' + dtj ;
 	var url = all_but +  cnn;
-	console.log('checking ' + url + ' and ' swap_to_puppet(url));
+	console.log('checking ' + url + ' and ' + swap_to_puppet(url));
 	if (check_if_exists(swap_to_puppet(url)) || check_if_exists(url)) {
 	    console.log('it existed!\n');
 	    cdate = all_but;
@@ -519,6 +519,7 @@ function swap_to_puppet(url) {
 	} else {
 	    console.log('no dice.');
 	    dcurr.subtract(1, 'hours');
+	    debugger;
 	    check_get_dates(dcurr);
 	}
     }
