@@ -5,12 +5,12 @@ var WAPO = "wapo";
 var WSJ = "wsj";
 var NYT = "nytimes";
 // URLs
-var nyt = 'www.nytimes.com-wkh.compressed.pdf';
-var cnn = 'www.cnn.com-phantomjs.compressed.pdf';
-var cnn_png = 'www.cnn.com-phantomjs.compressed.png';
-var fox = 'www.foxnews.com-wkh.compressed.pdf';
-var wsj = 'www.wsj.com-wkh.compressed.pdf';
-var wapo = 'www.washingtonpost.com-wkh.compressed.pdf';
+var nyt = 'www.nytimes.com-puppet.compressed.pdf';
+var cnn = 'www.cnn.com-puppet.compressed.pdf';
+var cnn_png = 'www.cnn.com-puppet.compressed.png';
+var fox = 'www.foxnews.com-puppet.compressed.pdf';
+var wsj = 'www.wsj.com-puppet.compressed.pdf';
+var wapo = 'www.washingtonpost.com-puppet.compressed.pdf';
 // URLS for puppet versions
 var nytpup = 'www.nytimes.com-puppet.compressed.pdf';
 var cnnpup = 'www.cnn.com-puppet.compressed.pdf';
