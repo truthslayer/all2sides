@@ -27,6 +27,7 @@ var wsjp = null;
 var wapop = null;
 var prefix, hprefix = "news-clips/";
 var cdate = "";
+var puppet = false;
 
 var getUrlParameter = function getUrlParameter(sParam) {
     var sPageURL = decodeURIComponent(window.location.search.substring(1)),
@@ -477,6 +478,27 @@ function do_loads() {
     render_right();
 }
 
+    
+function check_if_exists(url) {
+    var params = {Bucket: 'all2sides.com', Key: url};
+    s3.headObject(params, function(err, data) {
+	if (err) {
+	    // load the pdf like a normal fucking person
+	    //	    alert('did not find png.');
+	    return false;
+	} else {
+	    return true;
+	}
+    })
+}
+		 
+    
+
+function swap_to_puppet(url) {
+    var url_new = url.replace(/wkh/i, 'puppet');
+    return  url_new.replace(/phantomjs/i, 'puppet');
+}
+
     function check_get_dates(dcurr) {
 	if (!today(dcurr)) {
 	    var c =  date_yesterday() + '.23/'; 
@@ -489,20 +511,18 @@ function do_loads() {
 	console.log('checking hour ' + h + ' from date ' + dcurr.format("YYYY-MM-DD"));
 	var dtj =  dcurr.format("YYYY-MM-DD") + '.' + h + '/';
 	var all_but = 'news-clips/' + dtj ;
-    var url = all_but +  cnn;
-    var params = {Bucket: 'all2sides.com', Key: url};
-    s3.headObject(params, function(err, data) {
-	if (err) {
-	    dcurr.subtract(1, 'hours');
-	    check_get_dates(dcurr);
-	} else {
+	var url = all_but +  cnn;
+	var params = {Bucket: 'all2sides.com', Key: url};
+	if (check_if_exists(swap_to_puppet(url)) || check_if_exists(url)) {
 	    cdate = all_but;
 	    url_date(dtj);
 	    // load pdfs
 	    do_loads();
+	} else {
+	    dcurr.subtract(1, 'hours');
+	    check_get_dates(dcurr);
 	}
-    });
-}
+    }
 
 function dt_now() {
     var lT = moment().tz('America/New_York');
