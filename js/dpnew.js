@@ -427,24 +427,32 @@ window.onload=function(){
  
 
     function puppet_exists(cdate,  url, purl, can1, div1, can2, div2, a, a2) {
-	alert(cdate);
-	var h = cdate.format('HH');
-	console.log('checking url '  + url + 'hour ' + h + ' from date ' + cdate.format("YYYY-MM-DD"));
-	var dtj =  cdate.format("YYYY-MM-DD") + '.' + h + '/';
+//	alert(cdate);
+//	var h = cdate.format('HH');
+//	console.log('checking url '  + url + 'hour ' + h + ' from date ' + cdate.format("YYYY-MM-DD"));
+//	var dtj =  cdate.format("YYYY-MM-DD") + '.' + h + '/';
 	var all_but =  cdate ;
 	var check = all_but +  purl;
-	if (check_if_exists(check)) {
-	    // use puppet
-	    console.log("Puppet!." + check + ' found');
-	    loadPdf(cdate + purl, can1, div1, can2, div2, a, a2);
-	    return true;
-	}  else {
-	    console.log("Error." + check + ' not found' );
-	    console.log('not puppet\n');
-	    loadPdf(cdate + url, can1, div1, can2, div2, a, a2);
-	    return true;
-	}
+
+	
+	check_if_exists(swap_to_puppet(check), 
+			function (err,data) {
+			    if (err) {
+				console.log('no dice.');
+				debugger;
+				// todo, do something smarter than just assuming it's there.
+				console.log("Error. " + check + ' not found' );
+				console.log('not puppet\n');
+				loadPdf(cdate + url, can1, div1, can2, div2, a, a2);
+				return true;
+			    } else {
+				console.log('it existed! puppet load\n');
+				loadPdf(cdate + purl, can1, div1, can2, div2, a, a2);
+				return true;
+			    }
+			});
     }
+
 
     
 function date_obj_now() {
@@ -475,17 +483,9 @@ function do_loads() {
 }
 
     
-function check_if_exists(url) {
-    var params = {Bucket: 'all2sides.com', Key: url};
-    s3.headObject(params, function(err, data) {
-	if (err) {
-	    // load the pdf like a normal fucking person
-	    //	    alert('did not find png.');
-	    return false;
-	} else {
-	    return true;
-	}
-    })
+    function check_if_exists(url, fn) {
+	var params = {Bucket: 'all2sides.com', Key: url};
+	s3.waitFor('objectExists', params, fn);
 }
 		 
     
@@ -496,6 +496,7 @@ function swap_to_puppet(url) {
 }
 
     function check_get_dates(dcurr) {
+	console.log('here' + dcurr);
 	if (!today(dcurr)) {
 	    console.log('not today');
 	    var c =  date_yesterday() + '.23/'; 
@@ -510,19 +511,24 @@ function swap_to_puppet(url) {
 	var all_but = 'news-clips/' + dtj ;
 	var url = all_but +  cnn;
 	console.log('checking ' + url + ' and ' + swap_to_puppet(url));
-	if (check_if_exists(swap_to_puppet(url)) || check_if_exists(url)) {
-	    console.log('it existed!\n');
-	    cdate = all_but;
-	    url_date(dtj);
-	    // load pdfs
-	    do_loads();
-	} else {
-	    console.log('no dice.');
-	    dcurr.subtract(1, 'hours');
-	    debugger;
-	    check_get_dates(dcurr);
-	}
+
+	check_if_exists(swap_to_puppet(url), 
+			function (err,data) {
+			    if (err) {
+				console.log('no dice.');
+				dcurr.subtract(1, 'hours');
+				debugger;
+				check_get_dates(dcurr);
+			    } else {
+				console.log('it existed!\n');
+				cdate = all_but;
+				url_date(dtj);
+				// load pdfs
+				do_loads();
+			    }
+			});
     }
+
 
 function dt_now() {
     var lT = moment().tz('America/New_York');
