@@ -486,7 +486,7 @@ function do_loads() {
     function check_if_exists(url, fn) {
 	var params = {Bucket: 'all2sides.com', Key: url};
 	s3.waitFor('objectExists', params, fn);
-}
+    }
 		 
     
 
@@ -511,16 +511,30 @@ function swap_to_puppet(url) {
 	var all_but = 'news-clips/' + dtj ;
 	var url = all_but +  cnn;
 	console.log('checking ' + url + ' and ' + swap_to_puppet(url));
-
-	check_if_exists(swap_to_puppet(url), 
+	var params = {Bucket: 'all2sides.com', Key: url};
+	// non-puppet
+	s3.waitFor('objectExists', params,
 			function (err,data) {
 			    if (err) {
 				console.log('no dice.');
-				dcurr.subtract(1, 'hours');
-				debugger;
-				check_get_dates(dcurr);
+				// check puppet
+				var pparams = {Bucket: 'all2sides.com', Key: swap_to_puppet(url)};
+				s3.waitFor('objectExists', pparams,
+					   function(err,data) {
+					       if (err) {
+						   console.log('double puppet no dice.');
+						   // Now need to call with a smaller date
+						   var dnew = dcurr.subtract(1, 'hours');
+						   debugger;
+						   check_get_dates(dnew);
+					       } else {
+						   cdate = all_but;
+						   url_date(dtj);
+						   // load pdfs
+						   do_loads();
+					       }
+					   });
 			    } else {
-				console.log('it existed!\n');
 				cdate = all_but;
 				url_date(dtj);
 				// load pdfs
