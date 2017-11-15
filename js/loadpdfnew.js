@@ -222,7 +222,6 @@ function given_pdf_cnn(pdf, url, cvname, dname, cv2, d2, a, a2) {
 	    remove_loading(cvname);
 	}
     });
-    
 }
 
 function loadPdf(url, cvname, dname, cv2, d2, a, a2) {

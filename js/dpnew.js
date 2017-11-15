@@ -433,20 +433,46 @@ window.onload=function(){
 //	var dtj =  cdate.format("YYYY-MM-DD") + '.' + h + '/';
 	var all_but =  cdate ;
 	var check = all_but +  purl;
-
-	
-	check_if_exists(swap_to_puppet(check), 
-			function (err,data) {
+	var pparams = {Bucket: 'all2sides.com', Key: check};
+	s3.headObject(pparams,
+		      function (err,data) {
 			    if (err) {
-				console.log('no dice.');
-				debugger;
-				// todo, do something smarter than just assuming it's there.
-				console.log("Error. " + check + ' not found' );
-				console.log('not puppet\n');
-				loadPdf(cdate + url, can1, div1, can2, div2, a, a2);
-				return true;
+				//				alert('no dice on puppet.');
+				// check non-puppet
+				var params = {Bucket: 'all2sides.com', Key: all_but + url};
+				s3.headObject(params,
+					      function(err,data) {
+						  if (err) {
+						      console.log('double no dice on no puppet.');
+						      // Now need to call with a smaller date
+				//		      alert('not sure what is happening.');
+						      console.log('pdf could not be loaded. Writing such.');
+						      var dput;
+						      var cd;
+						      if (can1.match(/(.*)right(.*)/)) {
+							  dput =  'loading-right';
+							  cd = 'date-space-right';
+						      } else {
+							  dput =  'loading';
+							  cd = 'date-space';
+						      }
+						      var dp = document.getElementById(dput);
+						      dp.style.fontSize = '12px';
+						      dp.style.fontFamily = 'Poppins';
+						      dp.innerHTML = "This PDF cannot load. Try another date/site!";
+						      var cp = document.getElementById(cd);
+						      cp.style.fontSize = '12px';
+						      cp.style.fontFamily = 'Poppins';
+						      cp.innerHTML = "";
+						  } else {
+						      //						   console.log("Error. " + check + ' not found' );
+						      // alert('not puppet, but success!\n');
+						      loadPdf(cdate + url, can1, div1, can2, div2, a, a2);
+						      return true;
+						  }
+					      });
 			    } else {
-				console.log('it existed! puppet load\n');
+				// alert('it existed! puppet load\n');
 				loadPdf(cdate + purl, can1, div1, can2, div2, a, a2);
 				return true;
 			    }
@@ -483,10 +509,6 @@ function do_loads() {
 }
 
     
-    function check_if_exists(url, fn) {
-	var params = {Bucket: 'all2sides.com', Key: url};
-	s3.waitFor('objectExists', params, fn);
-    }
 		 
     
 
@@ -494,6 +516,8 @@ function swap_to_puppet(url) {
     var url_new = url.replace(/wkh/i, 'puppet');
     return  url_new.replace(/phantomjs/i, 'puppet');
 }
+
+    
 
     function check_get_dates(dcurr) {
 	console.log('here' + dcurr);
@@ -511,37 +535,31 @@ function swap_to_puppet(url) {
 	var all_but = 'news-clips/' + dtj ;
 	var url = all_but +  cnn;
 	console.log('checking ' + url + ' and ' + swap_to_puppet(url));
-	var params = {Bucket: 'all2sides.com', Key: url};
-	// non-puppet
-	s3.waitFor('objectExists', params,
-			function (err,data) {
-			    if (err) {
-				console.log('no dice.');
-				// check puppet
-				var pparams = {Bucket: 'all2sides.com', Key: swap_to_puppet(url)};
-				s3.waitFor('objectExists', pparams,
-					   function(err,data) {
-					       if (err) {
-						   console.log('double puppet no dice.');
-						   // Now need to call with a smaller date
-						   var dnew = dcurr.subtract(1, 'hours');
-						   debugger;
-						   check_get_dates(dnew);
-					       } else {
-						   cdate = all_but;
-						   url_date(dtj);
-						   // load pdfs
-						   do_loads();
-					       }
-					   });
-			    } else {
-				cdate = all_but;
-				url_date(dtj);
-				// load pdfs
-				do_loads();
-			    }
-			});
+	var pparams = {Bucket: 'all2sides.com', Key: swap_to_puppet(url)};
+	s3.headObject(pparams, function(err, data) {
+	    if (err) {
+		console.log('check_get_dates puppet no dice.');
+		var params = {Bucket: 'all2sides.com', Key: url};
+		s3.headObject(params, function(err, data) {
+		    if (err) {
+			// Now need to call with a smaller date
+			console.log('check_get_dates nonpuppet no dice.');
+			var dnew = dcurr.subtract(1, 'hours');
+			check_get_dates(dnew);
+		    } else {
+			cdate = all_but;
+			url_date(dtj);
+			// load pdfs
+			do_loads();			
+		    }});
+	    } else {
+		cdate = all_but;
+		url_date(dtj);
+		// load pdfs
+		do_loads();
+	    }});
     }
+		
 
 
 function dt_now() {

@@ -120,7 +120,7 @@ function cnn_special(url, cvname, dname, cv2, d2, a, a2) {
     s3.headObject(params, function(err, data) {
 	if (err) {
 	    // load the pdf like a normal fucking person
-//	    alert('did not find png.');
+	    //	    alert('did not find png.');
 	    var gpdf = get_pdf(CNN);
 	    if (gpdf != null) {
 		// we already have a pdf
@@ -222,7 +222,7 @@ function given_pdf_cnn(pdf, url, cvname, dname, cv2, d2, a, a2) {
 	    remove_loading(cvname);
 	}
     });
-    
+}
 
 function loadPdf(url, cvname, dname, cv2, d2, a, a2) {
     set_date_space(dname, url);    
